@@ -1,0 +1,9 @@
+Software for managing accounts of the GEC coperative store as well as the billing of the transactions.
+Guidelines:
+*Filenames start with small letters,preferably avoid underscores.
+
+Eg,use addItem.php instead of Add_Item.php
+
+*Variable names must start with small letters too.
+*Create/Edit installation script wherever the user configuration must occour.
+
