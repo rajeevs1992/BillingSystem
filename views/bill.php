@@ -1,12 +1,12 @@
 <html>
 <script type="text/javascript">
-function showUser(str)
+function populate(count,code)
 {
-if (str=="")
+if (code=="")
   {
-  document.getElementById("txtHint").innerHTML="";
-  return;
-  } 
+      document.getElementById("unitPrice"+count).value='0';
+	  return;
+	} 
 if (window.XMLHttpRequest)
   {// code for IE7+, Firefox, Chrome, Opera, Safari
   xmlhttp=new XMLHttpRequest();
@@ -19,33 +19,46 @@ xmlhttp.onreadystatechange=function()
   {
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
     {
-    document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
-    }
+		var json=eval('(' + xmlhttp.responseText + ')');
+
+    	document.getElementById("unitPrice"+count).value=json.unitPrice;
+	}
   }
-xmlhttp.open("GET","getuser.php?q="+str,true);
+xmlhttp.open("GET","../controllers/billComplete.php?code="+code,true);
 xmlhttp.send();
+}
+
+function calculate(count,qty)
+{
+	var total=document.getElementById("unitPrice"+count).value * qty;
+	document.getElementById("total"+count).value=total;
 }
 </script>
 <?php
+	echo "<div style='left:330px;position:absolute'>Item Code</div>";
+	echo "<div style='left:505px;position:absolute'>Qty</div>";
+	echo "<div style='left:680px;position:absolute'>Unit Price</div>";
+	echo "<div style='left:855px;position:absolute'>Total</div><br>";
 	echo"
-	<form action=/controllers/test.php method=post style=width:100%;height:500px>
+	<div style='
+	width:55%;height:200px;overflow:scroll;
+	top:35px;left:250;position:absolute;
+	border:3px black solid;'>
+	<form action=/controllers/test.php method=post>
 	";
 
-	echo "<div style='left:80px;position:absolute'>Item Code</div>";
-	echo "<div style='left:255px;position:absolute'>Qty</div>";
-	echo "<div style='left:430px;position:absolute'>Unit Price</div>";
-	echo "<div style='left:605px;position:absolute'>Total</div><br>";
-	for($i=1;$i<25;$i++)
+	for($i=1;$i<51;$i++)
 	{
 		echo "<input type=text name=num value=$i readonly size=2>";
-		echo "<input type=text name=code$i onchange=populate(this.value)>";
-		echo "<input type=text name=qty$i>";
-		echo "<input type=text id=unitPrice$i name=unitPrice$i value='' readonly>";
-		echo "<input type=text id=total$i name=total$i value='' readonly><br>\n";
+		echo "<input type=text name=code$i id=code$i onchange=populate($i,this.value)>";
+		echo "<input type=text name=qty$i id=qty$i onchange=calculate($i,this.value)>";
+		echo "<input type=text id=unitPrice$i name=unitPrice$i readonly>";
+		echo "<input type=text id=total$i name=total$i readonly><br>\n";
 
 	}
 	echo "
-	<input type=submit value='Add Users'>
+	</div>
+	<input type=submit value='Print' style='top:250px;position:absolute'>
 	</form>
 	</body>";
 ?>
