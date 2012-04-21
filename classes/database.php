@@ -14,8 +14,7 @@
 
 		public function autofill($itemCode)
 		{
-			$query="SELECT unitPrice FROM $this->tablename WHERE code='$itemCode'";
-
+			$query="SELECT * FROM $this->tablename WHERE code='$itemCode'";
 			$reply=mysql_query($query,$this->con);
 			echo json_encode(mysql_fetch_assoc($reply));
 		}
