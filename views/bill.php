@@ -1,8 +1,4 @@
 <html>
-
-
-
-
 <script type="text/javascript">
 function populate(count,code)
 {
@@ -35,41 +31,32 @@ xmlhttp.onreadystatechange=function()
 xmlhttp.open("GET","../controllers/billComplete.php?code="+code,true);
 xmlhttp.send();
 }
-
 function calculate(count,qty)
 {
+
 	var total=document.getElementById("PplusT"+count).value * qty;
 	document.getElementById("total"+count).value=total;
    	var unit=document.getElementById("unitPrice"+count).value;
    	var rot=document.getElementById("rateOfTax"+count).value;
    	document.getElementById("taxAmt"+count).value=unit*rot/100;
    	document.getElementById("cess"+count).value=unit*rot*.01/100;
-//	var i=0;
-//	var sum=0;
-//	var temp;
-//	for(i=1;i<51;i++)
-//	{
-//		temp=document.getElementById("total"+i).value;
-//		document.write('total'+i);
-//		sum=parseFloat(sum)+temp;
-//	}
-//	document.getElementById("total").value=sum;
-
+	var i=0;
+	var sum=0;
+	var temp;
+	for(i=1;i<51;i++)
+	{
+		temp=parseFloat(document.getElementById("total"+i).value);
+		sum=sum+temp;
+	}
+	document.getElementById("total").value=sum;
 }
-
-		
 </script>
-
-
-
 
 <?php
 	require_once("$_SERVER[DOCUMENT_ROOT]/classes/common.php");
 	$page=new page("ENGINEERING COLLEGE COOPERATIVE SOCIETY LTD,R-51");
 	$spaces="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-
-
 	echo "
 	<div align=center>
 	KGST No 26120286$spaces CST No 25125286$spaces TIN 32080668625$spaces
@@ -97,7 +84,7 @@ function calculate(count,qty)
 	";
 	for($i=1;$i<51;$i++)
 	{
-		echo "<input type=text tabindex=-1 value=$i readonly size=2>\n";
+		echo "<input type=text tabindex=-1 id=n$i value=$i readonly size=2>\n";
 		echo "<input type=text tabindex=-1 id='mrp$i' readonly size=4>\n";
 		echo "<input type=text tabindex=-1 id='PplusT$i' readonly size=7>\n";
 		echo "<input type=text tabindex=-1 id=name$i readonly size=30>\n";
@@ -107,15 +94,19 @@ function calculate(count,qty)
 		echo "<input type=text tabindex=-1 id=rateOfTax$i size=7 readonly>\n";
 		echo "<input type=text tabindex=-1 id=taxAmt$i size=7 readonly>\n";
 		echo "<input type=text tabindex=-1 id=cess$i size=7 readonly>\n";
-		echo "<input type=text tabindex=-1 id=total$i name=total$i readonly><br>\n";
+		echo "<input type=text tabindex=-1 id=total$i name=total$i value=0 readonly><br>\n";
 
 	}
-/*	echo "
+	echo "
 	</div>
-	<div style='top:400;left:100;position:absolute;'>
-	BILL AMOUNT :<input type=text id=total name=total>
+	<div style='top:350;left:830;position:absolute;'>
+	BILL AMOUNT :<input type=text id=total name=total readonly>
+	</div>
+	<div style='top:400;left:50;position:absolute;'>
+	TOTAL CASH :<input type=text id=cash onchange=\"document.getElementById('bal').value=(parseFloat(document.getElementById('total').value) - getElementById('cash').value)*-1;\">
+	Balance    :<input type=text id=bal readonly>
 	</div>
 	<input type=submit value='Print' style='top:600px;left:150px;position:absolute;height:25px'>
 	</form>
-	</body>";*/
+	</body>";
 ?>
