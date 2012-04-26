@@ -1,18 +1,17 @@
 <html>
 <script type="text/javascript">
-function populate(count,code)
+function request(url,code,count,flag)
 {
-if (code=="")
-  {
-      document.getElementById("unitPrice"+count).value='0';
-	  return;
-	} 
+if(flag==1)
+{
+			url=url+code;
+}
 if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  {
   xmlhttp=new XMLHttpRequest();
   }
 else
-  {// code for IE6, IE5
+  {
   xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
   }
 xmlhttp.onreadystatechange=function()
@@ -20,26 +19,38 @@ xmlhttp.onreadystatechange=function()
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
     {
 		var json=eval('(' + xmlhttp.responseText + ')');
-    	document.getElementById("mrp"+count).value=json.mrp;
-    	document.getElementById("PplusT"+count).value=parseInt(json.unitPrice)+(json.unitPrice*json.rateOfTax/100);
-    	document.getElementById("name"+count).value=json.name;
-    	document.getElementById("unitPrice"+count).value=json.unitPrice;
-    	document.getElementById("rateOfTax"+count).value=json.rateOfTax;
-
-	}
+		if(flag==1)
+		{
+			populate(json,count);
+		}
+   	}
   }
-xmlhttp.open("GET","../controllers/billComplete.php?code="+code,true);
+xmlhttp.open("GET",url,true);
 xmlhttp.send();
 }
+
+function populate(json,count)
+{
+	document.getElementById("mrp"+count).value=json.mrp;
+    document.getElementById("PplusT"+count).value=parseInt(json.unitPrice)+(json.unitPrice*json.rateOfTax/100);
+    document.getElementById("name"+count).value=json.name;
+    document.getElementById("unitPrice"+count).value=json.unitPrice;
+    document.getElementById("rateOfTax"+count).value=json.rateOfTax;
+}
+	
 function calculate(count,qty)
 {
-
 	var total=document.getElementById("PplusT"+count).value * qty;
 	document.getElementById("total"+count).value=total;
    	var unit=document.getElementById("unitPrice"+count).value;
    	var rot=document.getElementById("rateOfTax"+count).value;
    	document.getElementById("taxAmt"+count).value=unit*rot/100;
    	document.getElementById("cess"+count).value=unit*rot*.01/100;
+	sum();
+}
+
+function sum()
+{
 	var i=0;
 	var sum=0;
 	var temp;
@@ -50,6 +61,7 @@ function calculate(count,qty)
 	}
 	document.getElementById("total").value=sum;
 }
+
 </script>
 
 <?php
@@ -88,7 +100,7 @@ function calculate(count,qty)
 		echo "<input type=text tabindex=-1 id='mrp$i' readonly size=4>\n";
 		echo "<input type=text tabindex=-1 id='PplusT$i' readonly size=7>\n";
 		echo "<input type=text tabindex=-1 id=name$i readonly size=30>\n";
-		echo "<input type=text name=code$i id=code$i size=6 onchange=populate($i,this.value)>\n";
+		echo "<input type=text name=code$i id=code$i size=6 onchange=request('/controllers/billComplete.php?code=',this.value,$i,1)>\n";
 		echo "<input type=text name=qty$i  id=qty$i  size=6 onchange=calculate($i,this.value)>\n";
 		echo "<input type=text tabindex=-1 id=unitPrice$i name=unitPrice$i readonly>\n";
 		echo "<input type=text tabindex=-1 id=rateOfTax$i size=7 readonly>\n";
