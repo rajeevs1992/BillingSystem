@@ -36,6 +36,7 @@ function populate(json,count)
     document.getElementById("name"+count).value=json.name;
     document.getElementById("unitPrice"+count).value=json.unitPrice;
     document.getElementById("rateOfTax"+count).value=json.rateOfTax;
+    document.getElementById("qty"+count).value=''
 }
 	
 function calculate(count,qty)
@@ -60,37 +61,43 @@ function sum()
 		sum=sum+temp;
 	}
 	document.getElementById("total").value=sum;
+//	document.write(sum);
 }
+
+function verifyItemCode(count)
+{
+	document.write(document.getElementById('name'+count).length());
+/*	if(typeof getElementById('MRP'+count).value == 'undefined')
+	{
+		alert("The entered item code is invalid!!Please verify to continue");
+		getElementById('code'+count).value='';
+		getElementById('code'+count).click();
+	}*/
+}
+
 
 </script>
 
 <?php
 	require_once("$_SERVER[DOCUMENT_ROOT]/classes/common.php");
-	$page=new page("ENGINEERING COLLEGE COOPERATIVE SOCIETY LTD,R-51");
-	$spaces="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-	echo "
-	<div align=center>
-	KGST No 26120286$spaces CST No 25125286$spaces TIN 32080668625$spaces
-	</div>
-	";
-
+	$page=new page("Engineering College Co-Operative Society Ltd,R-51");
+	echo "<br><br><br>";
 	echo "<div style='left:10px;position:absolute'>No.</div>";
 	echo "<div style='left:55px;position:absolute'>MRP</div>";
 	echo "<div style='left:100px;position:absolute'>Price+Tax</div>";
-	echo "<div style='left:290px;position:absolute'>ITEM</div>";
-	echo "<div style='left:430px;position:absolute'>Code</div>";
-	echo "<div style='left:500px;position:absolute'>Qty</div>";
-	echo "<div style='left:592px;position:absolute'>Unit Price</div>";
-	echo "<div style='left:737px;position:absolute'>RoT</div>";
-	echo "<div style='left:792px;position:absolute'>Tax Amt</div>";
-	echo "<div style='left:882px;position:absolute'>Cess</div>";
-	echo "<div style='left:990px;position:absolute'>Total</div>";
+	echo "<div style='left:250px;position:absolute'>ITEM</div>";
+	echo "<div style='left:390px;position:absolute'>Code</div>";
+	echo "<div style='left:460px;position:absolute'>Qty</div>";
+	echo "<div style='left:512px;position:absolute'>Unit Price</div>";
+	echo "<div style='left:607px;position:absolute'>RoT</div>";
+	echo "<div style='left:660px;position:absolute'>Tax Amt</div>";
+	echo "<div style='left:750px;position:absolute'>Cess</div>";
+	echo "<div style='left:850px;position:absolute'>Total</div>";
 
 	echo"
 	<div style='
-	width:100%;height:200px;overflow:scroll;
-	top:135px;position:absolute;
+	width:980px;height:200px;overflow:scroll;
+	top:235px;position:absolute;
 	border:3px black solid;'>
 	<form action=/controllers/test.php method=post>
 	";
@@ -99,10 +106,10 @@ function sum()
 		echo "<input type=text tabindex=-1 id=n$i value=$i readonly size=2>\n";
 		echo "<input type=text tabindex=-1 id='mrp$i' readonly size=4>\n";
 		echo "<input type=text tabindex=-1 id='PplusT$i' readonly size=7>\n";
-		echo "<input type=text tabindex=-1 id=name$i readonly size=30>\n";
+		echo "<input type=text tabindex=-1 id=name$i readonly size=25>\n";
 		echo "<input type=text name=code$i id=code$i size=6 onchange=request('/controllers/billComplete.php?code=',this.value,$i,1)>\n";
-		echo "<input type=text name=qty$i  id=qty$i  size=6 onchange=calculate($i,this.value)>\n";
-		echo "<input type=text tabindex=-1 id=unitPrice$i name=unitPrice$i readonly>\n";
+		echo "<input type=text name=qty$i  id=qty$i  size=6 onfocus=verifyItemCode($i) onchange='calculate($i,this.value)'>\n";
+		echo "<input type=text tabindex=-1 id=unitPrice$i name=unitPrice$i size=7 readonly>\n";
 		echo "<input type=text tabindex=-1 id=rateOfTax$i size=7 readonly>\n";
 		echo "<input type=text tabindex=-1 id=taxAmt$i size=7 readonly>\n";
 		echo "<input type=text tabindex=-1 id=cess$i size=7 readonly>\n";
@@ -111,10 +118,10 @@ function sum()
 	}
 	echo "
 	</div>
-	<div style='top:350;left:830;position:absolute;'>
+	<div style='top:450;left:700;position:absolute;'>
 	BILL AMOUNT :<input type=text id=total name=total readonly>
 	</div>
-	<div style='top:400;left:50;position:absolute;'>
+	<div style='top:500;left:50;position:absolute;'>
 	TOTAL CASH :<input type=text id=cash onchange=\"document.getElementById('bal').value=(parseFloat(document.getElementById('total').value) - getElementById('cash').value)*-1;\">
 	Balance    :<input type=text id=bal readonly>
 	</div>
