@@ -1,10 +1,10 @@
 <html>
 <script type="text/javascript">
-function request(url,code,count,flag)
+function request(url,arg1,arg2,mode)
 {
-if(flag==1)
+if(mode==1)
 {
-			url=url+code;
+			url=url+arg1;
 }
 if (window.XMLHttpRequest)
   {
@@ -18,10 +18,14 @@ xmlhttp.onreadystatechange=function()
   {
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
     {
-		var json=eval('(' + xmlhttp.responseText + ')');
-		if(flag==1)
+		var reply=eval('(' + xmlhttp.responseText + ')');
+		if(mode==1)
 		{
-			populate(json,count);
+			populate(reply,arg2);
+		}
+		else if(mode==2)
+		{
+			stockVerificationAction(reply,arg1);
 		}
    	}
   }
@@ -36,18 +40,30 @@ function populate(json,count)
     document.getElementById("name"+count).value=json.name;
     document.getElementById("unitPrice"+count).value=json.unitPrice;
     document.getElementById("rateOfTax"+count).value=json.rateOfTax;
-    document.getElementById("qty"+count).value=''
+    document.getElementById("qty"+count).value='';
 }
-	
+
 function calculate(count,qty)
 {
 	var total=document.getElementById("PplusT"+count).value * qty;
 	document.getElementById("total"+count).value=total;
    	var unit=document.getElementById("unitPrice"+count).value;
-   	var rot=document.getElementById("rateOfTax"+count).value;
+	var rot=document.getElementById("rateOfTax"+count).value;
    	document.getElementById("taxAmt"+count).value=unit*rot/100;
    	document.getElementById("cess"+count).value=unit*rot*.01/100;
 	sum();
+}
+function stockVerificationAction(reply,count)
+{
+	var stock=parseInt(reply.stock);
+	if(stock<0)
+	{
+		alert("Out of Stock!!!Only "+stock*-1+" units remaining.");
+    	document.getElementById("qty"+count).value='';
+    	document.getElementById("qty"+count).focus();
+	}
+	else
+		calculate(count,reply.qty);
 }
 
 function sum()
@@ -61,18 +77,12 @@ function sum()
 		sum=sum+temp;
 	}
 	document.getElementById("total").value=sum;
-//	document.write(sum);
 }
 
-function verifyItemCode(count)
+function verifyStock(count,qty)
 {
-	document.write(document.getElementById('name'+count).length());
-/*	if(typeof getElementById('MRP'+count).value == 'undefined')
-	{
-		alert("The entered item code is invalid!!Please verify to continue");
-		getElementById('code'+count).value='';
-		getElementById('code'+count).click();
-	}*/
+    var code=document.getElementById("code"+count).value;
+	request("/controllers/verifyIfInStock.php?code="+code+"&qty="+qty,count,0,2);
 }
 
 
@@ -108,7 +118,7 @@ function verifyItemCode(count)
 		echo "<input type=text tabindex=-1 id='PplusT$i' readonly size=7>\n";
 		echo "<input type=text tabindex=-1 id=name$i readonly size=25>\n";
 		echo "<input type=text name=code$i id=code$i size=6 onchange=request('/controllers/billComplete.php?code=',this.value,$i,1)>\n";
-		echo "<input type=text name=qty$i  id=qty$i  size=6 onfocus=verifyItemCode($i) onchange='calculate($i,this.value)'>\n";
+		echo "<input type=text name=qty$i  id=qty$i  size=6  onchange='verifyStock($i,this.value)'>\n";
 		echo "<input type=text tabindex=-1 id=unitPrice$i name=unitPrice$i size=7 readonly>\n";
 		echo "<input type=text tabindex=-1 id=rateOfTax$i size=7 readonly>\n";
 		echo "<input type=text tabindex=-1 id=taxAmt$i size=7 readonly>\n";

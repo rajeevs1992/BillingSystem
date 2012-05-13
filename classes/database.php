@@ -1,13 +1,11 @@
 <?php
 	class database
 	{
-//		include("$_SERVER[DOCUMENT_ROOT]/coop/config/config.php");
 		private $con,$tablename;
 
 		public function __construct($tablename)
 		{
 			$this->tablename=$tablename;
-//			$this->con=mysql_connect($DB_HOST,$DB_USER,$DB_PASSWD);
 			$this->con=mysql_connect("localhost","root","password");
 			mysql_select_db("store");
 		}
@@ -18,5 +16,24 @@
 			$reply=mysql_query($query,$this->con);
 			echo json_encode(mysql_fetch_assoc($reply));
 		}
+
+		public function verifyStock($code,$qty)
+		{
+			$query="SELECT totalStock FROM $this->tablename WHERE code='$code'";
+			$reply=mysql_query($query,$this->con);
+			$reply=mysql_fetch_assoc($reply);
+			$stock=$reply['totalStock'];
+			if($stock-$qty<0)
+			{
+				$reply=array('code'=>$code,'stock'=>$stock*-1,'qty'=>$qty);
+				echo json_encode($reply);
+			}
+			else 
+			{
+				$reply=array('code'=>$code,'stock'=>$stock,'qty'=>$qty);
+				echo json_encode($reply);
+			}
+		}
+
 	};
 ?>
