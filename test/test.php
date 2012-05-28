@@ -1,4 +1,5 @@
 <?php
-	$var=array(1,2,3,4,5,6,7);
-	echo $var[0];
+$handle = printer_open();
+printer_write($handle, "Text to print");
+printer_close($handle);
 ?>

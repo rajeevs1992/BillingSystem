@@ -1,9 +1,9 @@
 <?php
 	class database
 	{
-		private $con,$tablename;
+		private $con;
 
-		public function __construct($tablename)
+		public function __construct()
 		{
 			$this->tablename=$tablename;
 			$this->con=mysql_connect("localhost","root","password");
@@ -12,14 +12,39 @@
 
 		public function autofill($itemCode)
 		{
-			$query="SELECT * FROM $this->tablename WHERE code='$itemCode'";
+			$query="SELECT * FROM item WHERE code='$itemCode'";
 			$reply=mysql_query($query,$this->con);
 			echo json_encode(mysql_fetch_assoc($reply));
+		}
+		public function verifyStockServer($code,$qty)
+		{
+			$query="SELECT totalStock FROM item WHERE code='$code'";
+			$reply=mysql_query($query,$this->con);
+			$reply=mysql_fetch_assoc($reply);
+			$stock=$reply['totalStock'];
+			if($stock-$qty<0)
+			{
+				$reply=array('code'=>$code,'stock'=>$stock*-1,'qty'=>$qty);
+				return $reply;
+			}
+			else 
+			{
+				$reply=array('code'=>$code,'stock'=>$stock,'qty'=>$qty);
+				return $reply;
+			}
+		}
+		public function query($query)
+		{
+			$reply=mysql_query($query);
+			if(mysql_num_rows($reply)==0)		
+				return 0;			
+			else
+    			return $reply;
 		}
 
 		public function verifyStock($code,$qty)
 		{
-			$query="SELECT totalStock FROM $this->tablename WHERE code='$code'";
+			$query="SELECT totalStock FROM item WHERE code='$code'";
 			$reply=mysql_query($query,$this->con);
 			$reply=mysql_fetch_assoc($reply);
 			$stock=$reply['totalStock'];
@@ -27,6 +52,7 @@
 			{
 				$reply=array('code'=>$code,'stock'=>$stock*-1,'qty'=>$qty);
 				echo json_encode($reply);
+				return $reply;
 			}
 			else 
 			{
