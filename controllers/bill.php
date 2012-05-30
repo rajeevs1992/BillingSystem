@@ -3,7 +3,7 @@
 	session_start();
 	$con=new database;
 	$i=1;
-	$querySales="INSERT INTO sales VALUES(
+	$querySales="INSERT INTO sales SET
 	billNo='%s',
 	date=CURDATE(),
 	salesNonTax='%s',
@@ -15,13 +15,13 @@
 	cess125pc='%s',
 	totalWithoutTax='%s',
 	cashOrCredit='%s',
-	user='%s')";
+	user='%s'";
 
-	$queryInvoice="INSERT INTO invoices VALUES(
+	$queryInvoice="INSERT INTO invoices SET
 	slNo='%s',
 	mrp='%s',
 	PplusT='%s',
-	item='%s',
+	name='%s',
 	code='%s',
 	qty='%s',
 	unitPrice='%s',
@@ -29,7 +29,7 @@
 	taxAmt='%s',
 	cess='%s',
 	total='%s',
-	billNo='%s')";
+	billNo='%s'";
 
 	$reply=$con->query("SELECT MAX(billNo) AS billNo FROM invoices");
 	if($reply!=0)
@@ -45,23 +45,23 @@
 			$reply=$con->query("SELECT * FROM item WHERE code='$code'");
 			if($reply!=0)
 				$reply=mysql_fetch_assoc($reply);
-
 			$query=sprintf($queryInvoice,
 			$i,$reply['mrp'],$_POST["PplusT$i"],
 			$reply['name'],$reply['code'],$qty,
 			$reply['unitPrice'],$reply['rateOfTax'],
 			$_POST["taxAmt$i"],$_POST["cess$i"],
 			$_POST["total$i"],$billNo);
-			echo $query;
 			$con->query($query);
 			$query='';
-
+			
+			$query="UPDATE item SET totalStock = (totalStock - $qty)  WHERE code='$code' ";
+			echo $query;
+			$con->query($query);
 		}
 		$i++;
 	}
 	$query="SELECT SUM(total) AS total FROM invoices WHERE billNo='$billNo' AND rateOfTax='0'";
 	$reply=$con->query($query);
-	echo $reply;
 	if($reply!=0)
 		$reply=mysql_fetch_assoc($reply);
 	$SnonTax=$reply['total'];
@@ -71,7 +71,6 @@
 	$query="SELECT SUM(total) AS total,SUM(taxAmt) AS tax,SUM(cess) as cess FROM invoices 
 	WHERE billNo='$billNo' AND rateOfTax='4'";
 	$reply=$con->query($query);
-	echo $reply;
 	if($reply!=0)
 		$reply=mysql_fetch_assoc($reply);
 	$S4=$reply['total'];
@@ -83,7 +82,6 @@
 	$query="SELECT SUM(total) AS total,SUM(taxAmt) AS tax,SUM(cess) AS cess FROM invoices 
 	WHERE billNo='$billNo' AND rateOfTax='12.5'";
 	$reply=$con->query($query);	
-	echo $reply;
 	if($reply!=0)
 		$reply=mysql_fetch_assoc($reply);
 	$S125=$reply['total'];
@@ -95,6 +93,7 @@
 	$totalWithoutTax=$SnonTax+$S4+$S125;
 	$query=sprintf($querySales,$billNo,$SnonTax,$S4,$S125,
 	$T4,$T125,$C4,$C125,$totalWithoutTax,'C',$_SESSION['uname']);
-	echo $query;
-//	$con->query($query);
+	$con->query($query);
+	$query='';
+
 ?>

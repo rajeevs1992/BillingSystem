@@ -53,10 +53,10 @@ function populate(json,count)
 function calculate(count,qty)
 {
 	var total=document.getElementById("PplusT"+count).value * qty;
-	document.getElementById("total"+count).value=total;
+	document.getElementById("total"+count).value=roundNumber(total,3);
    	var unit=document.getElementById("unitPrice"+count).value;
 	var rot=document.getElementById("rateOfTax"+count).value;
-   	document.getElementById("taxAmt"+count).value=roundNumber(unit*rot/100,3);
+   	document.getElementById("taxAmt"+count).value=roundNumber(qty*unit*rot/100,3);
    	document.getElementById("cess"+count).value=roundNumber(unit*rot*.01/100,3);
 	sum();
 }
@@ -68,7 +68,7 @@ function roundNumber(rnum, rlength)
 function stockVerificationAction(reply,count)
 {
 	var stock=parseInt(reply.stock);
-	if(stock<0)
+	if(stock<=0)
 	{
 		alert("Out of Stock!!!Only "+stock*-1+" units remaining.");
     	document.getElementById("qty"+count).value='';
@@ -99,8 +99,14 @@ function verifyStock(count,qty)
 
 function getBal(cash)
 {
-var bal=((parseFloat(document.getElementById('total').value) - parseFloat(cash))*-1);
-document.getElementById('bal').value=bal;
+	var bal=((parseFloat(document.getElementById('total').value) - parseFloat(cash))*-1);
+	if(bal<0)
+	{
+		alert("Bill amount greater than entered amount!!");
+		document.getElementById('cash').value='';
+		document.getElementById('cash').focus();
+	}
+	document.getElementById('bal').value=roundNumber(bal,3);
 }
 
 
@@ -156,9 +162,9 @@ document.getElementById('bal').value=bal;
 	</div>
 	<div style='top:500;left:50;position:absolute;'>
 	TOTAL CASH :<input type=text id=cash onchange=getBal(this.value)>
-	Balance    :<input type=text id=bal readonly $readonly>
+	Balance    :<input type=text id=bal readonly $readonly tabindex=-1>
 	</div>
-	<input type=submit value='Print' style='top:600px;left:150px;position:absolute;height:40px;width:80px'>
+	<input type=submit value='Print' style='top:600px;left:150px;position:absolute;height:40px;width:80px' id=print	>
 	</form>
 	</body>";
 ?>
