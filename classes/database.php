@@ -5,7 +5,6 @@
 
 		public function __construct()
 		{
-			$this->tablename=$tablename;
 			$this->con=mysql_connect("localhost","root","password");
 			mysql_select_db("store");
 		}

@@ -34,7 +34,7 @@
 		{
 			require_once("$_SERVER[DOCUMENT_ROOT]/classes/database.php");
 			$con=new database;
-			$reply=$con->query("select max(billNo) from bills");
+			$reply=$con->query("select max(billNo) from invoices");
 			$reply=mysql_fetch_assoc($reply);
 			return ($reply['max(billNo)']+1);
 		}
