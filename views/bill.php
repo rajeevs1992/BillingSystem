@@ -108,8 +108,18 @@ function getBal(cash)
 	}
 	document.getElementById('bal').value=roundNumber(bal,3);
 }
-
-
+function redirect()
+{	
+	 if(document.value=="print")
+        {
+                document.billForm.action="../controllers/bill.php";
+        }
+        else if(document.value=="save")
+        {
+                document.billForm.action="../controllers/save.php";
+        }
+        return true;
+}
 </script>
 
 <?php
@@ -137,7 +147,7 @@ function getBal(cash)
 	width:980px;height:200px;overflow:scroll;
 	top:235px;position:absolute;
 	border:3px black solid;'>
-	<form action=/controllers/bill.php method=post>
+	<form method=\"post\" name=\"billForm\" onsubmit=\"return redirect();\">
 	";
 	echo "<input type=hidden value=$billNo name=billNo>";
 	for($i=1;$i<51;$i++)
@@ -164,7 +174,8 @@ function getBal(cash)
 	TOTAL CASH :<input type=text id=cash onchange=getBal(this.value)>
 	Balance    :<input type=text id=bal readonly $readonly tabindex=-1>
 	</div>
-	<input type=submit value='Print' style='top:600px;left:150px;position:absolute;height:40px;width:80px' id=print	>
+	<input type=submit  style='top:600px;left:150px;position:absolute;height:40px;width:80px' id=print	onclick='document.value=this.value' value='print' name='Print'>
+	<input type=submit style='top:600px;left:250px;position:absolute;height:40px;width:80px' id=save	onclick='document.value=this.value' value='save' name='Save'>
 	</form>
 	</body>";
 ?>
