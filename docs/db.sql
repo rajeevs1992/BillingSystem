@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 31, 2012 at 12:08 AM
+-- Generation Time: Jun 13, 2012 at 11:41 PM
 -- Server version: 5.1.54
 -- PHP Version: 5.3.5-1ubuntu7.4
 
@@ -47,7 +47,10 @@ CREATE TABLE IF NOT EXISTS `invoices` (
 REPLACE INTO `invoices` (`slNo`, `mrp`, `PplusT`, `name`, `code`, `qty`, `unitPrice`, `rateOfTax`, `taxAmt`, `cess`, `total`, `billNo`) VALUES
 (1, 3, 3.12, 'Pencil Apsara', '001', 15, 3, 4, 1.8, 0.001, 46.8, '1'),
 (2, 12, 13.5, 'eraser', 'abc', 15, 12, 12.5, 22.5, 0.015, 202.5, '1'),
-(3, 5, 5, 'lexi', '101', 5, 5, 0, 0, 0, 25, '1');
+(3, 5, 5, 'lexi', '101', 5, 5, 0, 0, 0, 25, '1'),
+(1, 0, 9.994, 'Book-Theodolite field book', 'b008', 1, 9.61, 4, 0.384, 0.004, 9.994, '2'),
+(2, 0, 4.995, 'Arrows', 'a003', 6, 4.44, 12.5, 3.33, 0.006, 29.97, '2'),
+(3, 0, 119.954, 'Box Sigma Instrument', 'b010', 1, 115.34, 4, 4.614, 0.046, 119.954, '2');
 
 -- --------------------------------------------------------
 
@@ -66,6 +69,7 @@ CREATE TABLE IF NOT EXISTS `item` (
   `profitPerUnit` float DEFAULT NULL,
   `totalStock` int(11) DEFAULT NULL,
   `openingStock` int(11) DEFAULT NULL,
+  `valid` char(1) NOT NULL,
   PRIMARY KEY (`code`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -73,10 +77,27 @@ CREATE TABLE IF NOT EXISTS `item` (
 -- Dumping data for table `item`
 --
 
-REPLACE INTO `item` (`code`, `name`, `mrp`, `unitPrice`, `rateOfTax`, `sellingPrice`, `purchasingPrice`, `profitPerUnit`, `totalStock`, `openingStock`) VALUES
-('001', 'Pencil Apsara', 3, 3, 4, 2.75, 2.35, 0.25, 85, 104),
-('abc', 'eraser', 12, 12, 12.5, 15, 12, 3, 0, 15),
-('101', 'lexi', 5, 5, 0, 5, 5, 0, 45, 56);
+REPLACE INTO `item` (`code`, `name`, `mrp`, `unitPrice`, `rateOfTax`, `sellingPrice`, `purchasingPrice`, `profitPerUnit`, `totalStock`, `openingStock`, `valid`) VALUES
+('b008', 'Book-Theodolite field book', NULL, 9.61, 4, 10, 8, 10, 286, 287, 'y'),
+('a003', 'Arrows', NULL, 4.44, 12.5, 5, NULL, 5, 9, 15, 'y'),
+('b010', 'Box Sigma Instrument', NULL, 115.34, 4, 120, NULL, 120, 119, 150, 'y');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `purchase`
+--
+
+CREATE TABLE IF NOT EXISTS `purchase` (
+  `code` varchar(10) DEFAULT NULL,
+  `qty` int(11) DEFAULT NULL,
+  `date` date DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `purchase`
+--
+
 
 -- --------------------------------------------------------
 
@@ -105,7 +126,8 @@ CREATE TABLE IF NOT EXISTS `sales` (
 --
 
 REPLACE INTO `sales` (`billNo`, `date`, `salesNonTax`, `sales4pcTax`, `sales125pcTax`, `tax4pc`, `tax125pc`, `cess4pc`, `cess125pc`, `totalWithoutTax`, `cashOrCredit`, `user`) VALUES
-('1', '2012-05-30', 25, 46.8, 202.5, 1.8, 22.5, 0.001, 0.015, 274.3, 'C', 'rajeev');
+('1', '2012-05-30', 25, 46.8, 202.5, 1.8, 22.5, 0.001, 0.015, 274.3, 'C', 'rajeev'),
+('2', '2012-06-13', 0, 129.948, 29.97, 4.998, 3.33, 0.05, 0.006, 159.918, 'C', 'rajeev');
 
 -- --------------------------------------------------------
 

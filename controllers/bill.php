@@ -96,4 +96,6 @@
 	$con->query($query);
 	$query='';
 
+	header("location:/");
+
 ?>

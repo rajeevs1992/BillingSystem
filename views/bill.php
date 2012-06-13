@@ -43,7 +43,7 @@ function populate(json,count)
 		return;
 	}
 	document.getElementById("mrp"+count).value=json.mrp;
-    document.getElementById("PplusT"+count).value=roundNumber((parseInt(json.unitPrice)+(json.unitPrice*json.rateOfTax/100)),3);
+    document.getElementById("PplusT"+count).value=roundNumber((parseFloat(json.unitPrice)+(json.unitPrice*json.rateOfTax/100)),3);
     document.getElementById("name"+count).value=json.name;
     document.getElementById("unitPrice"+count).value=roundNumber(parseFloat(json.unitPrice),3);
     document.getElementById("rateOfTax"+count).value=json.rateOfTax;

@@ -11,7 +11,9 @@
 
 		public function autofill($itemCode)
 		{
-			$query="SELECT * FROM item WHERE code='$itemCode'";
+
+			$code=strtolower($itemCode);
+			$query="SELECT * FROM item WHERE code='$code'";
 			$reply=mysql_query($query,$this->con);
 			echo json_encode(mysql_fetch_assoc($reply));
 		}

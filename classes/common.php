@@ -3,6 +3,7 @@
 	{
 		public function __construct($title,$level)
 		{
+			error_reporting(E_ALL);
 			session_start();
 			if((!isset($_SESSION['uname'])) || $_SESSION['acessLevel']<$level)
 			{
@@ -27,7 +28,7 @@
 			echo sprintf($buttonLink,"/","Add new item","150");
 			echo sprintf($buttonLink,"/","Delete item","350");
 			echo sprintf($buttonLink,"/","View Monthly Statement","540");
-			echo sprintf($buttonLink,"/","View Full Stock Data","800");
+			echo sprintf($buttonLink,"/views/fullStockData.php","View Full Stock Data","800");
 			echo sprintf($buttonLink,"/controllers/logout.php","Logout","1024");
 		}
 		public function getBillNo()
