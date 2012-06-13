@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 13, 2012 at 11:41 PM
+-- Generation Time: Jun 13, 2012 at 11:48 PM
 -- Server version: 5.1.54
 -- PHP Version: 5.3.5-1ubuntu7.4
 
@@ -69,7 +69,6 @@ CREATE TABLE IF NOT EXISTS `item` (
   `profitPerUnit` float DEFAULT NULL,
   `totalStock` int(11) DEFAULT NULL,
   `openingStock` int(11) DEFAULT NULL,
-  `valid` char(1) NOT NULL,
   PRIMARY KEY (`code`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -77,10 +76,10 @@ CREATE TABLE IF NOT EXISTS `item` (
 -- Dumping data for table `item`
 --
 
-REPLACE INTO `item` (`code`, `name`, `mrp`, `unitPrice`, `rateOfTax`, `sellingPrice`, `purchasingPrice`, `profitPerUnit`, `totalStock`, `openingStock`, `valid`) VALUES
-('b008', 'Book-Theodolite field book', NULL, 9.61, 4, 10, 8, 10, 286, 287, 'y'),
-('a003', 'Arrows', NULL, 4.44, 12.5, 5, NULL, 5, 9, 15, 'y'),
-('b010', 'Box Sigma Instrument', NULL, 115.34, 4, 120, NULL, 120, 119, 150, 'y');
+REPLACE INTO `item` (`code`, `name`, `mrp`, `unitPrice`, `rateOfTax`, `sellingPrice`, `purchasingPrice`, `profitPerUnit`, `totalStock`, `openingStock`) VALUES
+('b008', 'Book-Theodolite field book', NULL, 9.61, 4, 10, 8, 10, 286, 287),
+('a003', 'Arrows', NULL, 4.44, 12.5, 5, NULL, 5, 9, 15),
+('b010', 'Box Sigma Instrument', NULL, 115.34, 4, 120, NULL, 120, 119, 150);
 
 -- --------------------------------------------------------
 
