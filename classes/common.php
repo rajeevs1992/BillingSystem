@@ -12,24 +12,26 @@
 			$spaces="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 			$buttonLink="<a href='%s' ><input type=submit value='%s' 
-			style=display:inline;height:25px;left:%s;top:100;position:absolute></a>$spaces";
+			style=display:inline;height:25px;left:%s;position:relative></a>$spaces";
 			$header="
 				<html>
 				<font face=ubuntu>
 				<title>$title</title>
 				<h1><center>$title</center></h1>
-				<div style=top:50;left:350;position:absolute;>
+				<div style=left:350;position:relative;>
 					KGST No 26120286$spaces CST No 25125286$spaces TIN 32080668625$spaces
 				</div>
-				<br><br><br>
+				<br>
 				<body background='/views/images/gr1.jpg' vlink=blue>";
 			echo $header;
-			echo sprintf($buttonLink,"/views/bill.php","New Bill","5");
-			echo sprintf($buttonLink,"/","Add new item","150");
-			echo sprintf($buttonLink,"/","Delete item","350");
-			echo sprintf($buttonLink,"/","View Monthly Statement","540");
-			echo sprintf($buttonLink,"/views/fullStockData.php","View Full Stock Data","800");
-			echo sprintf($buttonLink,"/controllers/logout.php","Logout","1024");
+			echo sprintf($buttonLink,"/views/bill.php","New Bill","50");
+			echo sprintf($buttonLink,"/views/addItem.php","Add new item","50");
+			echo sprintf($buttonLink,"/","Delete item","50");
+			echo sprintf($buttonLink,"/","View Monthly Statement","50");
+			echo sprintf($buttonLink,"/views/fullStockData.php","View Full Stock Data","50");
+			echo sprintf($buttonLink,"/views/purchase.php","Purchase","50");
+			echo sprintf($buttonLink,"/controllers/logout.php","Logout","50");
+			echo "<br>";
 		}
 		public function getBillNo()
 		{

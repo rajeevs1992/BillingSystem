@@ -127,9 +127,9 @@ function redirect()
 	$page=new page("Engineering College Co-Operative Society Ltd,R-51",1);
 	$billNo=$page->getBillNo();
 	$readonly="style=background:#f1ec9b";
-	echo "<div style='left:10px;position:absolute;color:red'>";
+	echo "<div style='left:10px;top:25px;position:relative;color:red'>";
 	echo "Bill Number:<input type=text value=$billNo readonly $readonly>&nbsp;&nbsp;";
-	echo "Billed By:<input type=text value=$_SESSION[uname] readonly $readonly></div><br><br><br>";
+	echo "Billed By:<input type=text value=$_SESSION[uname] readonly $readonly></div><br><br>";
 	echo "<div style='left:10px;position:absolute'>No.</div>";
 	echo "<div style='left:55px;position:absolute'>MRP</div>";
 	echo "<div style='left:100px;position:absolute'>Price+Tax</div>";
@@ -174,8 +174,8 @@ function redirect()
 	TOTAL CASH :<input type=text id=cash onchange=getBal(this.value)>
 	Balance    :<input type=text id=bal readonly $readonly tabindex=-1>
 	</div>
-	<input type=submit  style='top:600px;left:150px;position:absolute;height:40px;width:80px' id=print	onclick='document.value=this.value' value='print' name='Print'>
-	<input type=submit style='top:600px;left:250px;position:absolute;height:40px;width:80px' id=save	onclick='document.value=this.value' value='save' name='Save'>
+	<input type=submit  style='top:600px;left:150px;position:absolute;height:40px;width:80px' id=print	onclick='document.value=this.value' value='Print' name='Print'>
+	<input type=submit style='top:600px;left:250px;position:absolute;height:40px;width:80px' id=save	onclick='document.value=this.value' value='Save' name='Save'>
 	</form>
 	</body>";
 ?>
