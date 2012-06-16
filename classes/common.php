@@ -22,7 +22,7 @@
 					KGST No 26120286$spaces CST No 25125286$spaces TIN 32080668625$spaces
 				</div>
 				<br>
-				<body background='/views/images/gr1.jpg' vlink=blue>";
+				<body style='background:url(/views/images/gr1.jpg);position:fixed;' vlink=blue>";
 			echo $header;
 			echo sprintf($buttonLink,"/views/bill.php","New Bill","50");
 			echo sprintf($buttonLink,"/views/addItem.php","Add new item","50");
