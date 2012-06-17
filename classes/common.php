@@ -25,6 +25,7 @@
 				<body style='background:url(/views/images/gr1.jpg);position:fixed;' vlink=blue>";
 			echo $header;
 			echo sprintf($buttonLink,"/views/bill.php","New Bill","50");
+			echo sprintf($buttonLink,"/views/showSavedBills","Saved Bills","50");
 			echo sprintf($buttonLink,"/views/addItem.php","Add new item","50");
 			echo sprintf($buttonLink,"/","Delete item","50");
 			echo sprintf($buttonLink,"/","View Monthly Statement","50");
