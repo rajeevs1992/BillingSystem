@@ -110,13 +110,13 @@ function getBal(cash)
 }
 function redirect()
 {	
-	 if(document.value=="print")
+	 if(document.value=="Print")
         {
-                document.billForm.action="../controllers/bill.php";
+                document.billForm.action="/controllers/bill.php";
         }
-        else if(document.value=="save")
+        else if(document.value=="Save")
         {
-                document.billForm.action="../controllers/save.php";
+                document.billForm.action="/controllers/save.php";
         }
         return true;
 }
@@ -127,9 +127,9 @@ function redirect()
 	$page=new page("Engineering College Co-Operative Society Ltd,R-51",1);
 	$billNo=$page->getBillNo();
 	$readonly="style=background:#f1ec9b";
-	echo "<div style='left:10px;top:25px;position:relative;color:red'>";
+	echo "<div style='left:10px;color:red'>";
 	echo "Bill Number:<input type=text value=$billNo readonly $readonly>&nbsp;&nbsp;";
-	echo "Billed By:<input type=text value=$_SESSION[uname] readonly $readonly></div><br><br>";
+	echo "Billed By:<input type=text value=$_SESSION[uname] readonly $readonly></div><br>";
 	echo "<div style='left:10px;position:absolute'>No.</div>";
 	echo "<div style='left:55px;position:absolute'>MRP</div>";
 	echo "<div style='left:100px;position:absolute'>Price+Tax</div>";
@@ -145,10 +145,10 @@ function redirect()
 	echo"
 	<div style='
 	height:200px;overflow:scroll;
-	top:235px;position:absolute;
+	top:230px;position:absolute;
 	border:3px black solid;'>
-	<form method=\"post\" name=\"billForm\" onsubmit=\"return redirect();\">
-	";
+	<form method=\"post\" name=\"billForm\" onsubmit=\"return redirect();\">";
+//	echo "<form method=post action=/controllers/bill.php>";
 	echo "<input type=hidden value=$billNo name=billNo>";
 	for($i=1;$i<51;$i++)
 	{

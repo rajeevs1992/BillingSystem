@@ -32,7 +32,6 @@
 			echo sprintf($buttonLink,"/views/fullStockData.php","View Full Stock Data","50");
 			echo sprintf($buttonLink,"/views/purchase.php","Purchase","50");
 			echo sprintf($buttonLink,"/controllers/logout.php","Logout","50");
-			echo "<br>";
 		}
 		public function getBillNo()
 		{
