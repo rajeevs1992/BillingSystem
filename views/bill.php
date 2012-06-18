@@ -144,7 +144,7 @@ function redirect()
 
 	echo"
 	<div style='
-	width:980px;height:200px;overflow:scroll;
+	height:200px;overflow:scroll;
 	top:235px;position:absolute;
 	border:3px black solid;'>
 	<form method=\"post\" name=\"billForm\" onsubmit=\"return redirect();\">

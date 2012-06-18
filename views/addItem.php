@@ -41,7 +41,7 @@ function notify(json,count)
 	require_once("$_SERVER[DOCUMENT_ROOT]/classes/common.php");
 	$page=new page("Add New Item",1);
 
-	echo "<br><br><div style='left:10px;position:absolute'>No.</div>";
+	echo "<br><div style='left:10px;position:absolute'>No.</div>";
 	echo "<div style='left:55px;position:absolute'>Code</div>";
 	echo "<div style='left:200px;position:absolute'>ITEM</div>";
 	echo "<div style='left:320px;position:absolute'>MRP</div>";
@@ -51,7 +51,7 @@ function notify(json,count)
 	echo "<div style='left:575px;position:absolute'>Purchasing Price</div>";
 
 	echo"
-	<div style='width:670px;top:200px;position:absolute;border:3px black solid;'>
+	<div style='top:200px;position:absolute;border:3px black solid;'>
 	<form action=/controllers/addItem.php method=post >
 	";
 	for($i=1;$i<11;$i++)

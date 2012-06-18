@@ -19,7 +19,7 @@
 				<title>$title</title>
 				<h1><center>$title</center></h1>
 				<div style=left:350;position:relative;>
-					KGST No 26120286$spaces CST No 25125286$spaces TIN 32080668625$spaces
+					KGST No 26120286$spaces\n CST No 25125286$spaces\n TIN 32080668625$spaces\n
 				</div>
 				<br>
 				<body style='background:url(/views/images/gr1.jpg);position:fixed;' vlink=blue>";
