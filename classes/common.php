@@ -24,14 +24,14 @@
 				<br>
 				<body style='background:url(/views/images/gr1.jpg);position:fixed;' vlink=blue>";
 			echo $header;
-			echo sprintf($buttonLink,"/views/bill.php","New Bill","50");
-			echo sprintf($buttonLink,"/views/showSavedBills","Saved Bills","50");
-			echo sprintf($buttonLink,"/views/addItem.php","Add new item","50");
-			echo sprintf($buttonLink,"/","Delete item","50");
-			echo sprintf($buttonLink,"/","View Monthly Statement","50");
-			echo sprintf($buttonLink,"/views/fullStockData.php","View Full Stock Data","50");
-			echo sprintf($buttonLink,"/views/purchase.php","Purchase","50");
-			echo sprintf($buttonLink,"/controllers/logout.php","Logout","50");
+			echo sprintf($buttonLink,"/views/bill.php","New Bill","0");
+			echo sprintf($buttonLink,"/views/showSavedBills","Saved Bills","0");
+			echo sprintf($buttonLink,"/views/addItem.php","Add new item","0");
+			echo sprintf($buttonLink,"/","Delete item","0");
+			echo sprintf($buttonLink,"/","View Monthly Statement","0");
+			echo sprintf($buttonLink,"/views/fullStockData.php","View Full Stock Data","0");
+			echo sprintf($buttonLink,"/views/purchase.php","Purchase","0");
+			echo sprintf($buttonLink,"/controllers/logout.php","Logout","0");
 		}
 		public function getBillNo()
 		{

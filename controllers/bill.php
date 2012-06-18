@@ -1,6 +1,4 @@
 <?php
-	if($_POST['Save']=='Save')
-		header("location:/test/test.php");
 	require_once("$_SERVER[DOCUMENT_ROOT]/classes/database.php");
 
 	session_start();
