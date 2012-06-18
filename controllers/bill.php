@@ -15,8 +15,7 @@
 	cess4pc='%s',
 	cess125pc='%s',
 	totalWithoutTax='%s',
-	cashOrCredit='%s',
-	user='%s'";
+	cashOrCredit='%s'";
 
 	$queryInvoice="INSERT INTO invoices SET
 	slNo='%s',
@@ -30,7 +29,8 @@
 	taxAmt='%s',
 	cess='%s',
 	total='%s',
-	billNo='%s'";
+	billNo='%s',
+	user='%s'";
 
 	$reply=$con->query("SELECT MAX(billNo) AS billNo FROM invoices");
 	if($reply!=0)
@@ -51,7 +51,7 @@
 			$reply['name'],$reply['code'],$qty,
 			$reply['unitPrice'],$reply['rateOfTax'],
 			$_POST["taxAmt$i"],$_POST["cess$i"],
-			$_POST["total$i"],$billNo);
+			$_POST["total$i"],$billNo,$_SESSION['uname']);
 			$con->query($query);
 			$query='';
 			
@@ -93,7 +93,7 @@
 	
 	$totalWithoutTax=$SnonTax+$S4+$S125;
 	$query=sprintf($querySales,$billNo,$SnonTax,$S4,$S125,
-	$T4,$T125,$C4,$C125,$totalWithoutTax,'C',$_SESSION['uname']);
+	$T4,$T125,$C4,$C125,$totalWithoutTax,'C');
 	$con->query($query);
 	$query='';
 

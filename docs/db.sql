@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 13, 2012 at 11:48 PM
+-- Generation Time: Jun 19, 2012 at 12:19 AM
 -- Server version: 5.1.54
 -- PHP Version: 5.3.5-1ubuntu7.4
 
@@ -37,20 +37,27 @@ CREATE TABLE IF NOT EXISTS `invoices` (
   `taxAmt` float DEFAULT NULL,
   `cess` float DEFAULT NULL,
   `total` float DEFAULT NULL,
-  `billNo` varchar(10) DEFAULT NULL
+  `billNo` varchar(10) DEFAULT NULL,
+  `user` varchar(25) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `invoices`
 --
 
-REPLACE INTO `invoices` (`slNo`, `mrp`, `PplusT`, `name`, `code`, `qty`, `unitPrice`, `rateOfTax`, `taxAmt`, `cess`, `total`, `billNo`) VALUES
-(1, 3, 3.12, 'Pencil Apsara', '001', 15, 3, 4, 1.8, 0.001, 46.8, '1'),
-(2, 12, 13.5, 'eraser', 'abc', 15, 12, 12.5, 22.5, 0.015, 202.5, '1'),
-(3, 5, 5, 'lexi', '101', 5, 5, 0, 0, 0, 25, '1'),
-(1, 0, 9.994, 'Book-Theodolite field book', 'b008', 1, 9.61, 4, 0.384, 0.004, 9.994, '2'),
-(2, 0, 4.995, 'Arrows', 'a003', 6, 4.44, 12.5, 3.33, 0.006, 29.97, '2'),
-(3, 0, 119.954, 'Box Sigma Instrument', 'b010', 1, 115.34, 4, 4.614, 0.046, 119.954, '2');
+REPLACE INTO `invoices` (`slNo`, `mrp`, `PplusT`, `name`, `code`, `qty`, `unitPrice`, `rateOfTax`, `taxAmt`, `cess`, `total`, `billNo`, `user`) VALUES
+(1, 3, 3.12, 'Pencil Apsara', '001', 15, 3, 4, 1.8, 0.001, 46.8, '1', NULL),
+(2, 12, 13.5, 'eraser', 'abc', 15, 12, 12.5, 22.5, 0.015, 202.5, '1', NULL),
+(3, 5, 5, 'lexi', '101', 5, 5, 0, 0, 0, 25, '1', NULL),
+(1, 0, 9.994, 'Book-Theodolite field book', 'b008', 1, 9.61, 4, 0.384, 0.004, 9.994, '2', NULL),
+(2, 0, 4.995, 'Arrows', 'a003', 6, 4.44, 12.5, 3.33, 0.006, 29.97, '2', NULL),
+(3, 0, 119.954, 'Box Sigma Instrument', 'b010', 1, 115.34, 4, 4.614, 0.046, 119.954, '2', NULL),
+(1, 0, 9.994, 'Book-Theodolite field book', 'b008', 15, 9.61, 4, 5.766, 0.004, 149.91, '3', NULL),
+(2, 0, 4.995, 'Arrows', 'a003', 15, 4.44, 12.5, 8.325, 0.006, 74.925, '3', NULL),
+(1, 0, 9.994, 'Book-Theodolite field book', 'b008', 1, 9.61, 4, 0.384, 0.004, 9.994, '4', NULL),
+(2, 0, 4.995, 'Arrows', 'a003', 1, 4.44, 12.5, 0.555, 0.006, 4.995, '4', NULL),
+(1, 0, 9.994, 'Book-Theodolite field book', 'b008', 100, 9.61, 4, 38.44, 0.004, 999.4, '5', NULL),
+(1, 0, 9.994, 'Book-Theodolite field book', 'b008', 15, 9.61, 4, 5.766, 0.004, 149.91, '6', 'rajeev');
 
 -- --------------------------------------------------------
 
@@ -77,9 +84,9 @@ CREATE TABLE IF NOT EXISTS `item` (
 --
 
 REPLACE INTO `item` (`code`, `name`, `mrp`, `unitPrice`, `rateOfTax`, `sellingPrice`, `purchasingPrice`, `profitPerUnit`, `totalStock`, `openingStock`) VALUES
-('b008', 'Book-Theodolite field book', NULL, 9.61, 4, 10, 8, 10, 286, 287),
-('a003', 'Arrows', NULL, 4.44, 12.5, 5, NULL, 5, 9, 15),
-('b010', 'Box Sigma Instrument', NULL, 115.34, 4, 120, NULL, 120, 119, 150);
+('b008', 'Book-Theodolite field book', NULL, 9.61, 4, 10, 8, 10, 4, 287),
+('a003', 'Arrows', NULL, 4.44, 12.5, 5, NULL, 5, 8, 15),
+('b010', 'Box Sigma Instrument', NULL, 115.34, 4, 120, NULL, 120, 119, 149);
 
 -- --------------------------------------------------------
 
@@ -97,6 +104,14 @@ CREATE TABLE IF NOT EXISTS `purchase` (
 -- Dumping data for table `purchase`
 --
 
+REPLACE INTO `purchase` (`code`, `qty`, `date`) VALUES
+('b008', 15, '2012-06-18'),
+('b008', 15, '2012-06-18'),
+('b008', 15, '2012-06-18'),
+('b008', 15, '2012-06-18'),
+('b008', 15, '2012-06-18'),
+('b008', 15, '2012-06-18'),
+('a003', 15, '2012-06-18');
 
 -- --------------------------------------------------------
 
@@ -116,7 +131,6 @@ CREATE TABLE IF NOT EXISTS `sales` (
   `cess125pc` float DEFAULT NULL,
   `totalWithoutTax` float DEFAULT NULL,
   `cashOrCredit` char(1) DEFAULT NULL,
-  `user` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`billNo`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -124,9 +138,13 @@ CREATE TABLE IF NOT EXISTS `sales` (
 -- Dumping data for table `sales`
 --
 
-REPLACE INTO `sales` (`billNo`, `date`, `salesNonTax`, `sales4pcTax`, `sales125pcTax`, `tax4pc`, `tax125pc`, `cess4pc`, `cess125pc`, `totalWithoutTax`, `cashOrCredit`, `user`) VALUES
-('1', '2012-05-30', 25, 46.8, 202.5, 1.8, 22.5, 0.001, 0.015, 274.3, 'C', 'rajeev'),
-('2', '2012-06-13', 0, 129.948, 29.97, 4.998, 3.33, 0.05, 0.006, 159.918, 'C', 'rajeev');
+REPLACE INTO `sales` (`billNo`, `date`, `salesNonTax`, `sales4pcTax`, `sales125pcTax`, `tax4pc`, `tax125pc`, `cess4pc`, `cess125pc`, `totalWithoutTax`, `cashOrCredit`) VALUES
+('1', '2012-05-30', 25, 46.8, 202.5, 1.8, 22.5, 0.001, 0.015, 274.3, 'C'),
+('2', '2012-06-13', 0, 129.948, 29.97, 4.998, 3.33, 0.05, 0.006, 159.918, 'C'),
+('3', '2012-06-18', 0, 149.91, 74.925, 5.766, 8.325, 0.004, 0.006, 224.835, 'C'),
+('4', '2012-06-18', 0, 9.994, 4.995, 0.384, 0.555, 0.004, 0.006, 14.989, 'C'),
+('5', '2012-06-18', 0, 0, 0, 0, 0, 0, 0, 0, 'C'),
+('6', '2012-06-19', 0, 149.91, 0, 5.766, 0, 0.004, 0, 149.91, 'C');
 
 -- --------------------------------------------------------
 

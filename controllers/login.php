@@ -6,11 +6,18 @@
 	$reply=$con->query("SELECT uname,acessLevel FROM users WHERE uname='$uname' AND passwd='$passwd'");
 	if($reply!=0)
 	{
-		$reply=mysql_fetch_assoc($reply);
 		session_start();
+		$reply=mysql_fetch_assoc($reply);
 		$_SESSION['uname']=$reply['uname'];
 		$_SESSION['acessLevel']=$reply['acessLevel'];
-		header("location:/views/bill.php");
+		if(file_exists($_SERVER['DOCUMENT_ROOT']."/reports/".date("FY").".csv"))
+		{
+			header("location:/views/bill.php");
+		}
+		else
+		{
+			header("location:/controllers/reportGen.php");
+		}
 	}
 	else
 	{
