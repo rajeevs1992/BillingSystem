@@ -166,3 +166,5 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 REPLACE INTO `users` (`uname`, `passwd`, `email`, `acessLevel`) VALUES
 ('rajeev', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'rajeevs1992@gmail.com', 3);
+
+create table temp (tempBillNo INT(11),code varchar(5),qty int(11));
