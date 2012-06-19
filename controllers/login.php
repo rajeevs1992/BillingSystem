@@ -10,7 +10,8 @@
 		$reply=mysql_fetch_assoc($reply);
 		$_SESSION['uname']=$reply['uname'];
 		$_SESSION['acessLevel']=$reply['acessLevel'];
-		if(file_exists($_SERVER['DOCUMENT_ROOT']."/reports/".date("FY").".csv"))
+		$var=date("FY", mktime(0, 0, 0, (date('m')-1))); 
+		if(file_exists($_SERVER['DOCUMENT_ROOT']."/reports/$var.csv"))
 		{
 			header("location:/views/bill.php");
 		}
