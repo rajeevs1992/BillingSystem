@@ -20,8 +20,13 @@
 		{
 			if (xmlhttp.readyState==4 && xmlhttp.status==200)
 		    {
-				var reply=eval('(' + xmlhttp.responseText + ')');
-				populate(reply);
+				if(xmlhttp.responseText=='None')
+					document.getElementById('tab').innerHTML='No data!!';
+				else
+				{
+					var reply=eval('(' + xmlhttp.responseText + ')');
+					populate(reply);
+				}
 		   	}
 		}
 		xmlhttp.open(\"GET\",url,true);

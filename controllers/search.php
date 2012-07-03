@@ -19,4 +19,6 @@
 		}
 		echo json_encode($a);
 	}
+	else
+		echo 'None';
 ?>
