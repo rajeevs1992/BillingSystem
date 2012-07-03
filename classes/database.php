@@ -37,10 +37,10 @@
 		public function query($query)
 		{
 			$reply=mysql_query($query);
-			if(mysql_num_rows($reply)==0)		
-				return 0;			
-			else
+			if($reply)		
     			return $reply;
+			else
+				return 0;			
 		}
 
 		public function verifyStock($code,$qty)
