@@ -197,7 +197,7 @@ function redirect()
 	<input type=submit style='top:600px;left:250px;position:absolute;height:40px;width:80px' id=save	onclick='document.value=this.value' value='Save' name='Save'>
 	</form>
 	<div style='right:5px;top:230px;position:absolute;border:3px black solid;height:200px;width:300px;overflow:scroll;'>
-	<h4 style=position:fixed;>Search code:</h4>
+	<h4>Search code:</h4>
 	Item name:<input type=text onkeyup=request('/controllers/search.php?mode=3&val=',this.value,'a',3)>
 	<div id=search style=color:red;>
 	</div>
