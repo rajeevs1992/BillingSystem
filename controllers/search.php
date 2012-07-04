@@ -1,24 +1,36 @@
 <?php
 	require_once("$_SERVER[DOCUMENT_ROOT]/classes/database.php");
 	$con=new database;
-	if($_GET['mode']=='1')
+	$mode=$_GET['mode'];
+	$val=$_GET['val'];
+	$reply='';
+	if($mode=='1')
 	{
-		$reply=$con->query("SELECT * FROM item WHERE code LIKE '%$_GET[val]%'");
+		$reply=$con->query("SELECT * FROM item WHERE code LIKE '%$val%'");
+	}
+	else if($mode=='2')
+	{
+		$reply=$con->query("SELECT * FROM item WHERE name LIKE '%$val%'");
 	}
 	else
 	{
-		$reply=$con->query("SELECT * FROM item WHERE name LIKE '%$_GET[val]%'");
+		if($val!='')
+			$reply=$con->query("SELECT code,name FROM item WHERE name LIKE '%$val%'");
+		else
+		{
+			echo json_encode('');
+			exit(0);
+		}
+
 	}
+	$a=array();
 	if($reply!=0)
 	{
-		$a=array();
 		$i=0;
 		while($row=mysql_fetch_assoc($reply))
 		{
 			$a[$i++]=$row;
 		}
-		echo json_encode($a);
 	}
-	else
-		echo 'None';
+	echo json_encode($a);
 ?>

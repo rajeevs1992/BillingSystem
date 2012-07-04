@@ -2,7 +2,7 @@
 <script type="text/javascript">
 function request(url,arg1,arg2,mode)
 {
-if(mode==1)
+if(mode==1||mode==3)
 {
 			url=url+arg1;
 }
@@ -27,12 +27,31 @@ xmlhttp.onreadystatechange=function()
 		{
 			stockVerificationAction(reply,arg1);
 		}
+		else if(mode==3)
+		{
+			search(reply);
+		}
    	}
   }
 xmlhttp.open("GET",url,true);
 xmlhttp.send();
 }
-
+function search(reply)
+{
+	if(reply==false)
+	{
+		document.getElementById('search').innerHTML='No results!!';
+	}
+	else
+	{
+		var data='';
+		for(i=0;i<reply.length;i++)
+		{
+			data=data+reply[i].code+'---'+reply[i].name+'<br>';
+		}
+		document.getElementById('search').innerHTML=data;
+	}
+}
 function populate(json,count)
 {
 	if(json==false)
@@ -177,5 +196,11 @@ function redirect()
 	<input type=submit  style='top:600px;left:150px;position:absolute;height:40px;width:80px' id=print	onclick='document.value=this.value' value='Print' name='Print'>
 	<input type=submit style='top:600px;left:250px;position:absolute;height:40px;width:80px' id=save	onclick='document.value=this.value' value='Save' name='Save'>
 	</form>
+	<div style='right:5px;top:230px;position:absolute;border:3px black solid;height:200px;width:300px;overflow:scroll;'>
+	<h4 style=position:fixed;>Search code:</h4>
+	Item name:<input type=text onkeyup=request('/controllers/search.php?mode=3&val=',this.value,'a',3)>
+	<div id=search style=color:red;>
+	</div>
+	</div>
 	</body>";
 ?>

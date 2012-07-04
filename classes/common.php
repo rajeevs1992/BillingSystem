@@ -28,7 +28,7 @@
 			echo sprintf($buttonLink,"/views/showSavedBills","Saved Bills","0");
 			echo sprintf($buttonLink,"/views/addItem.php","Add new item","0");
 			echo sprintf($buttonLink,"/","Delete item","0");
-			echo sprintf($buttonLink,"/","View Monthly Statement","0");
+			echo sprintf($buttonLink,"/views/monthlyReport.php","View Monthly Statement","0");
 			echo sprintf($buttonLink,"/views/fullStockData.php","View Full Stock Data","0");
 			echo sprintf($buttonLink,"/views/purchase.php","Purchase","0");
 			echo sprintf($buttonLink,"/controllers/logout.php","Logout","0");
