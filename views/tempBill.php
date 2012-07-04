@@ -112,11 +112,11 @@ function redirect()
 {	
 	 if(document.value=="Print")
         {
-                document.billForm.action="../controllers/bill.php";
+                document.billForm.action="/controllers/bill.php";
         }
         else if(document.value=="Save")
         {
-                document.billForm.action="../controllers/save.php";
+                document.billForm.action="/controllers/save.php";
         }
         return true;
 }
@@ -124,9 +124,9 @@ function redirect()
 
 <?php
 	require_once("$_SERVER[DOCUMENT_ROOT]/classes/common.php");
-	require_once("../classes/database.php");
-	$query="SELECT * FROM temp WHERE tempBillNo=".$_GET['billno'];
-	$con=new Database();
+	require_once("$_SERVER[DOCUMENT_ROOT]/classes/database.php");
+	$query="SELECT * FROM temp WHERE tempBillNo='$_GET[billno]'";
+	$con=new database();
 	$reply=$con->query($query);
 	$page=new page("Engineering College Co-Operative Society Ltd,R-51",1);
 	$billNo=$page->getBillNo();
@@ -148,18 +148,22 @@ function redirect()
 
 	echo"
 	<div style='
-	width:980px;height:200px;overflow:scroll;
+	height:200px;overflow:scroll;
 	top:235px;position:absolute;
 	border:3px black solid;'>
 	<form method=\"post\" name=\"billForm\" onsubmit=\"return redirect();\">
 	";
 	echo "<input type=hidden value=$billNo name=billNo>";
-	$i=0;
-	$query="SELECT * FROM item WHERE code=%s";
+	$i=1;
+	$query="SELECT * FROM item WHERE code='%s'";
 	$billTotal=0;
+	if($reply!=0)
+	{
 	while($row=mysql_fetch_assoc($reply)){
 		$itemQuery=sprintf($query,$row['code']);
 		$itemReply=$con->query($itemQuery);
+		if($itemReply!=0)
+		{
 		$attr=mysql_fetch_assoc($itemReply);
 		echo "<input type=text tabindex=-1 id=n$i value=$i readonly $readonly size=2>\n";
 		echo "<input type=text tabindex=-1 id='mrp$i' readonly $readonly size=4 value=".$attr['mrp']."\n>";
@@ -179,6 +183,8 @@ function redirect()
 		$billTotal+=$total;
 		echo "<input type=text tabindex=-1 id=total$i name=total$i  readonly $readonly value=".$total."><br>\n";
 	$i++;
+	}
+	}
 	}
 	$k=$i;
 	for($i=$k;$i<51;$i++)
