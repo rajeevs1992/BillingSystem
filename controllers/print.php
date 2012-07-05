@@ -12,7 +12,7 @@
 			echo "Invoice Number:$_GET[billNo]<br>Date:$date<br>"
 		?>
 
-		<table style='font-size:10px' cellpadding=5px>
+		<table style='font-size:9px' cellpadding=5px>
 		<tr>
 			<th>Sl no</th>
 			<th>Code</th>
