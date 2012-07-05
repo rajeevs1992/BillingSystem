@@ -6,7 +6,12 @@
 	<div style='width:450px;border:3px black solid;'>
 		<div style='font-size:12px;text-align:center'>ENGINEERING COLLEGE COOPERATIVE STORE,R-51</div>
 		<div style='font-size:10px;text-align:center'>GOVT. ENGINEERING COLLEGE,THRISSUR-9,
-		Ph:0487-2334637,Email:gect_society@yahoo.com</div>
+		Ph:0487-2334637,Email:gect_society@yahoo.com</div><br>
+		<?php
+			$date=date('d-m-y');
+			echo "Invoice Number:$_GET[billNo]<br>Date:$date<br>"
+		?>
+
 		<table style='font-size:10px' cellpadding=5px>
 		<tr>
 			<th>Sl no</th>

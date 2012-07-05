@@ -1,5 +1,4 @@
 <?php
-	$i='a';
-	$i++;
-	echo $i;
+			$date=date('d-m-y');
+			echo $date;
 ?>
