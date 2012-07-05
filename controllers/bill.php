@@ -97,6 +97,5 @@
 	$con->query($query);
 	$query='';
 
-	header("location:/");
-
+	header("location:/views/print.php?billNo=$billNo");
 ?>

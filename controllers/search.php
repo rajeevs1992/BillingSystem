@@ -15,7 +15,7 @@
 	else
 	{
 		if($val!='')
-			$reply=$con->query("SELECT code,name FROM item WHERE name LIKE '%$val%'");
+			$reply=$con->query("SELECT code,name,totalStock FROM item WHERE name LIKE '%$val%'");
 		else
 		{
 			echo json_encode('');
