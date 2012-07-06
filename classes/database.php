@@ -1,4 +1,18 @@
 <?php
+	
+/**
+  A class for database tracnsactions .
+
+  This class includes the necessary functions for initiating a database connection,
+  making query ,rolling back database and other application specific routines like,
+  generating autofill data and Stock Verification.	
+  
+
+  @categroy  database
+  @package   gec-store
+
+*/
+
 	class database
 	{
 		private $con;
@@ -62,5 +76,8 @@
 			}
 		}
 
+		public function rollback() { 
+			mysql_query("ROLLBACK",$this->con);
+		}	
 	};
 ?>
