@@ -164,7 +164,8 @@ function redirect()
 	echo "<th>RoT</th>";
 	echo "<th>Tax Amt</th>";
 	echo "<th>Cess</th>";
-	echo "<th>Total</th><tr>";
+	echo "<th>Total</th><tr>
+	<form method=\"post\" name=\"billForm\" onsubmit=\"return redirect();\">";
 	echo "<td><input type=text tabindex=-1 id=n1 value=1 readonly $readonly size=2></td>\n";
 	echo "<td><input type=text tabindex=-1 id='mrp1' readonly $readonly size=4></td>\n";
 	echo "<td><input type=text tabindex=-1 id='PplusT1' name=PplusT1 readonly $readonly size=7></td>\n";
@@ -182,8 +183,7 @@ function redirect()
 	<div style='
 	height:200px;overflow:scroll;
 	top:260px;left:9px;position:absolute;'
-	>
-	<form method=\"post\" name=\"billForm\" onsubmit=\"return redirect();\">";
+	>";
 	echo "<input type=hidden value=$billNo name=billNo>";
 	for($i=2;$i<51;$i++)
 	{
@@ -202,7 +202,7 @@ function redirect()
 	}
 	echo "
 	</div>
-	<div style='top:450;left:600;position:absolute;'>
+	<div style='top:470;left:600;position:absolute;'>
 	BILL AMOUNT :<input type=text id=total name=total readonly $readonly>
 	</div>
 	<div style='top:500;left:50;position:absolute;'>
