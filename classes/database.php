@@ -19,9 +19,9 @@
 
 		public function __construct()
 		{
-			include("db.php");
-			$this->con=mysql_connect("localhost",$uname,$passwd);
-			mysql_select_db("store");
+			include("../config/config.php");
+			$this->con=mysql_connect($DB_HOST,$DB_USER,$DB_PASSWD);
+			mysql_select_db($DB_NAME);
 		}
 
 		public function autofill($itemCode)
