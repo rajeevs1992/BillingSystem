@@ -9,29 +9,26 @@
 			{
 				header("location:/views/login.php");
 			}
-			$spaces="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-			$buttonLink="<a href='%s' ><input type=submit value='%s' 
-			style=display:inline;height:25px;left:%s;position:relative></a>$spaces";
+			$buttonLink="<th><a href='%s' ><input type=submit value='%s' style=height:25px;width:130px></a></th>";
 			$header="
 				<html>
 				<font face=ubuntu>
 				<title>$title</title>
 				<h1><center>$title</center></h1>
-				<div style=left:350;position:relative;>
-					KGST No 26120286$spaces\n CST No 25125286$spaces\n TIN 32080668625$spaces\n
-				</div>
 				<br>
-				<body style='background:url(/views/images/gr1.jpg);position:fixed;' vlink=blue>";
-			echo $header;
-			echo sprintf($buttonLink,"/views/bill.php","New Bill","0");
-			echo sprintf($buttonLink,"/views/showSavedBills","Saved Bills","0");
-			echo sprintf($buttonLink,"/views/addItem.php","Add new item","0");
-			echo sprintf($buttonLink,"/","Delete item","0");
-			echo sprintf($buttonLink,"/views/monthlyReport.php","View Monthly Statement","0");
-			echo sprintf($buttonLink,"/views/fullStockData.php","View Full Stock Data","0");
-			echo sprintf($buttonLink,"/views/purchase.php","Purchase","0");
-			echo sprintf($buttonLink,"/controllers/logout.php","Logout","0");
+				<body style='background:url(/views/images/gr1.jpg)' vlink=blue>";
+			echo "$header
+				<table border=1>
+				<tr>";
+			echo sprintf($buttonLink,"/views/bill.php","New Bill");
+			echo sprintf($buttonLink,"/views/showSavedBills","Saved Bills");
+			echo sprintf($buttonLink,"/views/addItem.php","Add new item");
+			echo sprintf($buttonLink,"/","Delete item");
+			echo sprintf($buttonLink,"/views/monthlyReport.php","Monthly Statement");
+			echo sprintf($buttonLink,"/views/fullStockData.php","Full Stock");
+			echo sprintf($buttonLink,"/views/purchase.php","Purchase");
+			echo sprintf($buttonLink,"/controllers/logout.php","Logout");
+			echo "</tr></table>";	
 		}
 		public function getBillNo()
 		{

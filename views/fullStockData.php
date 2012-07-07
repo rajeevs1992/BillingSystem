@@ -85,8 +85,8 @@
 </script>";
 	$reply=$con->query("SELECT SUM(unitPrice*totalStock) AS valueCS,SUM(unitPrice*openingStock) AS valueOS FROM item");
 	$reply=mysql_fetch_assoc($reply);
-	$valueCS=$reply['valueCS'];
-	$valueOS=$reply['valueOS'];
+	$valueCS=round($reply['valueCS'],2);
+	$valueOS=round($reply['valueOS'],2);
 	$sales=$valueOS-$valueCS;
 	echo "<br>
 	<table border=4 cellpadding=4 >
@@ -103,8 +103,7 @@
 	</table>
 	<br>
 	Search:<br>
-	Code: <input type=text onkeyup=request(this.value,1) />
-	Item Name: <input type=text onkeyup=request(this.value,2)>
+	Code/Name: <input type=text onkeyup=request(this.value,1) />
 	<br>
 	<br>
 		";

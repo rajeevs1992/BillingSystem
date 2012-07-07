@@ -6,16 +6,12 @@
 	$reply='';
 	if($mode=='1')
 	{
-		$reply=$con->query("SELECT * FROM item WHERE code LIKE '%$val%'");
-	}
-	else if($mode=='2')
-	{
-		$reply=$con->query("SELECT * FROM item WHERE name LIKE '%$val%'");
+		$reply=$con->query("SELECT * FROM item WHERE name LIKE '%$val%' OR code LIKE '%$val%'");
 	}
 	else
 	{
 		if($val!='')
-			$reply=$con->query("SELECT code,name,totalStock FROM item WHERE name LIKE '%$val%'");
+			$reply=$con->query("SELECT code,name,totalStock FROM item WHERE name LIKE '%$val%' OR code LIKE '%$val%'");
 		else
 		{
 			echo json_encode('');

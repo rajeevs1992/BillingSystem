@@ -1,4 +1,7 @@
-<html>
+<?php
+	require_once("$_SERVER[DOCUMENT_ROOT]/classes/common.php");
+	$page=new page("Engineering College Co-Operative Society Ltd,R-51",1);
+?>
 <script type="text/javascript">
 function request(url,arg1,arg2,mode)
 {
@@ -142,8 +145,10 @@ function redirect()
 </script>
 
 <?php
-	require_once("$_SERVER[DOCUMENT_ROOT]/classes/common.php");
-	$page=new page("Engineering College Co-Operative Society Ltd,R-51",1);
+	$spaces="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+	echo "<div style=left:350;position:absolute;>
+		KGST No 26120286$spaces\n CST No 25125286$spaces\n TIN 32080668625$spaces\n
+		</div><br><br>";
 	$billNo=$page->getBillNo();
 	$readonly="style=background:#f1ec9b";
 	echo "<div style='left:10px;color:red'>";
@@ -201,7 +206,7 @@ function redirect()
 	<div style=color:green;font-size:12>
 	Fig. in bracket:Stock<br>
 	</div>
-	Item name:<input type=text onkeyup=request('/controllers/search.php?mode=3&val=',this.value,'a',3)>
+	Item name/Code:<input type=text onkeyup=request('/controllers/search.php?mode=3&val=',this.value,'a',3)>
 	<div id=search style=color:red;>
 	</div>
 	</div>

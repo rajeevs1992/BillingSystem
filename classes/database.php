@@ -19,7 +19,8 @@
 
 		public function __construct()
 		{
-			$this->con=mysql_connect("localhost","root","password");
+			include("db.php");
+			$this->con=mysql_connect("localhost",$uname,$passwd);
 			mysql_select_db("store");
 		}
 
