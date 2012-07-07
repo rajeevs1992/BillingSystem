@@ -154,27 +154,38 @@ function redirect()
 	echo "<div style='left:10px;color:red'>";
 	echo "Bill Number:<input type=text value=$billNo readonly $readonly>&nbsp;&nbsp;";
 	echo "Billed By:<input type=text value=$_SESSION[uname] readonly $readonly></div><br>";
-	echo "<div style='left:10px;position:absolute'>No.</div>";
-	echo "<div style='left:55px;position:absolute'>MRP</div>";
-	echo "<div style='left:100px;position:absolute'>Price+Tax</div>";
-	echo "<div style='left:250px;position:absolute'>ITEM</div>";
-	echo "<div style='left:390px;position:absolute'>Code</div>";
-	echo "<div style='left:460px;position:absolute'>Qty</div>";
-	echo "<div style='left:512px;position:absolute'>Unit Price</div>";
-	echo "<div style='left:607px;position:absolute'>RoT</div>";
-	echo "<div style='left:660px;position:absolute'>Tax Amt</div>";
-	echo "<div style='left:750px;position:absolute'>Cess</div>";
-	echo "<div style='left:850px;position:absolute'>Total</div>";
+	echo "<table cellpadding=0><tr><th>No.</th>";
+	echo "<th>MRP</th>";
+	echo "<th>Price+Tax</th>";
+	echo "<th>ITEM</th>";
+	echo "<th>Code</th>";
+	echo "<th>Qty</th>";
+	echo "<th>Unit Price</th>";
+	echo "<th>RoT</th>";
+	echo "<th>Tax Amt</th>";
+	echo "<th>Cess</th>";
+	echo "<th>Total</th><tr>";
+	echo "<td><input type=text tabindex=-1 id=n1 value=1 readonly $readonly size=2></td>\n";
+	echo "<td><input type=text tabindex=-1 id='mrp1' readonly $readonly size=4></td>\n";
+	echo "<td><input type=text tabindex=-1 id='PplusT1' name=PplusT1 readonly $readonly size=7></td>\n";
+	echo "<td><input type=text tabindex=-1 id=name1 readonly $readonly size=25></td>\n";
+	echo "<td><input type=text name=code1 id=code1 size=6 onchange=request('/controllers/billComplete.php?code=',this.value,1,1)></td>\n";
+	echo "<td><input type=text name=qty1  id=qty1  size=6  onchange='verifyStock(1,this.value)'></td>\n";
+	echo "<td><input type=text tabindex=-1 id=unitPrice1 name=unitPrice1 size=7 $readonly readonly></td>\n";
+	echo "<td><input type=text tabindex=-1 id=rateOfTax1 size=7 readonly $readonly></td>\n";
+	echo "<td><input type=text tabindex=-1 id=taxAmt1 name=taxAmt1 size=7 readonly $readonly></td>\n";
+	echo "<td><input type=text tabindex=-1 id=cess1 name=cess1 size=7 readonly $readonly></td>\n";
+	echo "<td><input type=text tabindex=-1 id=total1 name=total1 value=0 readonly $readonly></td></tr></table>\n";
+
 
 	echo"
 	<div style='
 	height:200px;overflow:scroll;
-	top:230px;position:absolute;
-	border:3px black solid;'>
+	top:260px;left:9px;position:absolute;'
+	>
 	<form method=\"post\" name=\"billForm\" onsubmit=\"return redirect();\">";
-//	echo "<form method=post action=/controllers/bill.php>";
 	echo "<input type=hidden value=$billNo name=billNo>";
-	for($i=1;$i<51;$i++)
+	for($i=2;$i<51;$i++)
 	{
 		echo "<input type=text tabindex=-1 id=n$i value=$i readonly $readonly size=2>\n";
 		echo "<input type=text tabindex=-1 id='mrp$i' readonly $readonly size=4>\n";
