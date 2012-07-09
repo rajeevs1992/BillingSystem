@@ -2,12 +2,13 @@
 <?php
 	require_once("$_SERVER[DOCUMENT_ROOT]/classes/common.php");
 	require_once("$_SERVER[DOCUMENT_ROOT]/classes/database.php");
+	include("$_SERVER[DOCUMENT_ROOT]/config/config.php");
 	$page=new page("Stock",3);
 	$con=new database;
 	echo "<script language=javascript>
 	function request(value,mode)
 	{
-		var url='/controllers/search?val='+value+'&mode='+mode;
+		var url='/controllers/search.php?val='+value+'&mode='+mode;
 		if (window.XMLHttpRequest)
 		  {
 			  xmlhttp=new XMLHttpRequest();
@@ -125,6 +126,10 @@
 		";
 	while($row=mysql_fetch_assoc($reply))
 	{
+			if($row['rateOfTax']==1)
+				$row['rateOfTax']=$tax1;
+			else if($row['rateOfTax']==2)
+				$row['rateOfTax']=$tax2;
 		echo "
 		<tr>
 			<td>$row[code]</td>

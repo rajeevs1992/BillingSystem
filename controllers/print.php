@@ -12,7 +12,7 @@
 			echo "Invoice Number:$_GET[billNo]<br>Date:$date<br>"
 		?>
 
-		<table style='font-size:9px' cellpadding=5px>
+		<table style='font-size:9px' border=1 cellpadding=5px>
 		<tr>
 			<th>Sl no</th>
 			<th>Code</th>
@@ -68,17 +68,17 @@
 		$total=$totalGross+$totalTax;
 		echo "
 		<tr>
-			<td></td>
-			<td>TOTAL</td>
-			<td></td>
-			<td></td>
-			<td>$totalUP</td>
-			<td>$totalQty</td>
-			<td>$totalGross</td>
-			<td></td>
-			<td></td>
-			<td>$totalTax</td>
-			<td>$total</td>
+			<th></th>
+			<th>TOTAL</th>
+			<th></th>
+			<th></th>
+			<th>$totalUP</th>
+			<th>$totalQty</th>
+			<th>$totalGross</th>
+			<th></th>
+			<th></th>
+			<th>$totalTax</th>
+			<th>$total</th>
 		</tr>
 		</table>
 		";

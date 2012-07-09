@@ -65,9 +65,9 @@ function populate(json,count)
 		return;
 	}
 	document.getElementById("mrp"+count).value=json.mrp;
-    document.getElementById("PplusT"+count).value=roundNumber((parseFloat(json.unitPrice)+(json.unitPrice*json.rateOfTax/100)),3);
+    document.getElementById("PplusT"+count).value=roundNumber((parseFloat(json.unitPrice)+(json.unitPrice*json.rateOfTax/100)),2);
     document.getElementById("name"+count).value=json.name;
-    document.getElementById("unitPrice"+count).value=roundNumber(parseFloat(json.unitPrice),3);
+    document.getElementById("unitPrice"+count).value=roundNumber(parseFloat(json.unitPrice),2);
     document.getElementById("rateOfTax"+count).value=json.rateOfTax;
     document.getElementById("qty"+count).value='';
 }
@@ -75,11 +75,10 @@ function populate(json,count)
 function calculate(count,qty)
 {
 	var total=document.getElementById("PplusT"+count).value * qty;
-	document.getElementById("total"+count).value=roundNumber(total,3);
+	document.getElementById("total"+count).value=roundNumber(total,2);
    	var unit=document.getElementById("unitPrice"+count).value;
 	var rot=document.getElementById("rateOfTax"+count).value;
-   	document.getElementById("taxAmt"+count).value=roundNumber(qty*unit*rot/100,3);
-   	document.getElementById("cess"+count).value=roundNumber(unit*rot*.01/100,3);
+   	document.getElementById("taxAmt"+count).value=roundNumber(qty*unit*rot/100,2);
 	sum();
 }
 function roundNumber(rnum, rlength) 
@@ -110,7 +109,7 @@ function sum()
 		temp=parseFloat(document.getElementById("total"+i).value);
 		sum=sum+temp;
 	}
-	document.getElementById("total").value=roundNumber(sum,3);
+	document.getElementById("total").value=roundNumber(sum,2);
 }
 
 function verifyStock(count,qty)
@@ -128,7 +127,7 @@ function getBal(cash)
 		document.getElementById('cash').value='';
 		document.getElementById('cash').focus();
 	}
-	document.getElementById('bal').value=roundNumber(bal,3);
+	document.getElementById('bal').value=roundNumber(bal,2);
 }
 function redirect()
 {	
@@ -163,7 +162,6 @@ function redirect()
 	echo "<th>Unit Price</th>";
 	echo "<th>RoT</th>";
 	echo "<th>Tax Amt</th>";
-	echo "<th>Cess</th>";
 	echo "<th>Total</th><tr>
 	<form method=\"post\" name=\"billForm\" onsubmit=\"return redirect();\">";
 	echo "<td><input type=text tabindex=-1 id=n1 value=1 readonly $readonly size=2></td>\n";
@@ -175,7 +173,6 @@ function redirect()
 	echo "<td><input type=text tabindex=-1 id=unitPrice1 name=unitPrice1 size=7 $readonly readonly></td>\n";
 	echo "<td><input type=text tabindex=-1 id=rateOfTax1 size=7 readonly $readonly></td>\n";
 	echo "<td><input type=text tabindex=-1 id=taxAmt1 name=taxAmt1 size=7 readonly $readonly></td>\n";
-	echo "<td><input type=text tabindex=-1 id=cess1 name=cess1 size=7 readonly $readonly></td>\n";
 	echo "<td><input type=text tabindex=-1 id=total1 name=total1 value=0 readonly $readonly></td></tr></table>\n";
 
 
@@ -196,7 +193,6 @@ function redirect()
 		echo "<input type=text tabindex=-1 id=unitPrice$i name=unitPrice$i size=7 $readonly readonly>\n";
 		echo "<input type=text tabindex=-1 id=rateOfTax$i size=7 readonly $readonly>\n";
 		echo "<input type=text tabindex=-1 id=taxAmt$i name=taxAmt$i size=7 readonly $readonly>\n";
-		echo "<input type=text tabindex=-1 id=cess$i name=cess$i size=7 readonly $readonly>\n";
 		echo "<input type=text tabindex=-1 id=total$i name=total$i value=0 readonly $readonly><br>\n";
 
 	}

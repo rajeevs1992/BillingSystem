@@ -26,11 +26,16 @@
 
 		public function autofill($itemCode)
 		{
-
+			include("$_SERVER[DOCUMENT_ROOT]/config/config.php");
 			$code=strtolower($itemCode);
 			$query="SELECT * FROM item WHERE code='$code'";
 			$reply=mysql_query($query,$this->con);
-			echo json_encode(mysql_fetch_assoc($reply));
+			$reply=mysql_fetch_assoc($reply);
+			if($reply['rateOfTax']==1)
+				$reply['rateOfTax']=$tax1;
+			else if($reply['rateOfTax']==2)
+				$reply['rateOfTax']=$tax2;
+			echo json_encode($reply);
 		}
 		public function verifyStockServer($code,$qty)
 		{

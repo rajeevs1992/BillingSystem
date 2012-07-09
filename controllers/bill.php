@@ -1,5 +1,6 @@
 <?php
 	require_once("$_SERVER[DOCUMENT_ROOT]/classes/database.php");
+	include("$_SERVER[DOCUMENT_ROOT]/config/config.php");
 
 	session_start();
 	$con=new database;
@@ -8,12 +9,10 @@
 	billNo='%s',
 	date=CURDATE(),
 	salesNonTax='%s',
-	sales4pcTax='%s',
-	sales125pcTax='%s',
-	tax4pc='%s',
-	tax125pc='%s',
-	cess4pc='%s',
-	cess125pc='%s',
+	tax1sales='%s',
+	tax2sales='%s',
+	tax1='%s',
+	tax2='%s',
 	totalWithoutTax='%s',
 	cashOrCredit='%s'";
 
@@ -27,7 +26,6 @@
 	unitPrice='%s',
 	rateOfTax='%s',
 	taxAmt='%s',
-	cess='%s',
 	total='%s',
 	billNo='%s',
 	user='%s'";
@@ -46,17 +44,20 @@
 			$reply=$con->query("SELECT * FROM item WHERE code='$code'");
 			if($reply!=0)
 				$reply=mysql_fetch_assoc($reply);
+			if($reply['rateOfTax']==1)
+				$reply['rateOfTax']=$tax1;
+			else if($reply['rateOfTax']==2)
+				$reply['rateOfTax']=$tax2;
 			$query=sprintf($queryInvoice,
 			$i,$reply['mrp'],$_POST["PplusT$i"],
 			$reply['name'],$reply['code'],$qty,
 			$reply['unitPrice'],$reply['rateOfTax'],
-			$_POST["taxAmt$i"],$_POST["cess$i"],
+			$_POST["taxAmt$i"],
 			$_POST["total$i"],$billNo,$_SESSION['uname']);
 			$con->query($query);
 			$query='';
 			
 			$query="UPDATE item SET totalStock = (totalStock - $qty)  WHERE code='$code' ";
-			echo $query;
 			$con->query($query);
 		}
 		$i++;
@@ -69,31 +70,29 @@
 	$query='';
 	$reply='';
 
-	$query="SELECT SUM(total) AS total,SUM(taxAmt) AS tax,SUM(cess) as cess FROM invoices 
-	WHERE billNo='$billNo' AND rateOfTax='4'";
+	$query="SELECT SUM(total) AS total,SUM(taxAmt) AS tax FROM invoices 
+	WHERE billNo='$billNo' AND rateOfTax='$tax1'";
 	$reply=$con->query($query);
 	if($reply!=0)
 		$reply=mysql_fetch_assoc($reply);
-	$S4=$reply['total'];
-	$T4=$reply['tax'];
-	$C4=$reply['cess'];
+	$S_t1=$reply['total'];
+	$T_t1=$reply['tax'];
 	$query='';
 	$reply='';
 
-	$query="SELECT SUM(total) AS total,SUM(taxAmt) AS tax,SUM(cess) AS cess FROM invoices 
-	WHERE billNo='$billNo' AND rateOfTax='12.5'";
+	$query="SELECT SUM(total) AS total,SUM(taxAmt) AS tax FROM invoices 
+	WHERE billNo='$billNo' AND rateOfTax='$tax2'";
 	$reply=$con->query($query);	
 	if($reply!=0)
 		$reply=mysql_fetch_assoc($reply);
-	$S125=$reply['total'];
-	$T125=$reply['tax'];
-	$C125=$reply['cess'];
+	$S_t2=$reply['total'];
+	$T_t2=$reply['tax'];
 	$query='';
 	$reply='';
 	
-	$totalWithoutTax=$SnonTax+$S4+$S125;
-	$query=sprintf($querySales,$billNo,$SnonTax,$S4,$S125,
-	$T4,$T125,$C4,$C125,$totalWithoutTax,'C');
+	$totalWithoutTax=$SnonTax+$S_t1+$S_t2;
+	$query=sprintf($querySales,$billNo,$SnonTax,$S_t1,$S_t2,
+	$T_t1,$T_t2,$totalWithoutTax,'CA');
 	$con->query($query);
 	$query='';
 

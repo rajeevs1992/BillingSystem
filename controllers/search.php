@@ -1,5 +1,6 @@
 <?php
 	require_once("$_SERVER[DOCUMENT_ROOT]/classes/database.php");
+	include("$_SERVER[DOCUMENT_ROOT]/config/config.php");
 	$con=new database;
 	$mode=$_GET['mode'];
 	$val=$_GET['val'];
@@ -25,6 +26,10 @@
 		$i=0;
 		while($row=mysql_fetch_assoc($reply))
 		{
+			if($row['rateOfTax']==1)
+				$row['rateOfTax']=$tax1;
+			else if($row['rateOfTax']==2)
+				$row['rateOfTax']=$tax2;
 			$a[$i++]=$row;
 		}
 	}
