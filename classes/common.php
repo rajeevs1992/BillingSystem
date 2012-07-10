@@ -18,7 +18,7 @@
 				<br>
 				<body style='background:url(/views/images/gr1.jpg)' vlink=blue>";
 			echo "$header
-				<table border=1 cellpadding=5px>
+				<table border=1 cellpadding=5px align=center>
 				<tr>";
 			echo sprintf($buttonLink,"/views/bill.php","New Bill");
 			echo sprintf($buttonLink,"/views/showSavedBills.php","Saved Bills");

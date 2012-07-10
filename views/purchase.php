@@ -56,24 +56,19 @@ xmlhttp.send();
 
 function notify(json)
 {
-	if(json==false)
-	{
-		alert("Eh?!!\nItem does not exist!!!\nDid you mean 'Add new item'?");
-    	document.getElementById("code").value='';
-    	document.getElementById("code").focus();
-		return;
-	}
-	else
+	if(json!=false)
 	{
     	document.getElementById("iname").value=json.name;
+    	document.getElementById("write").value='0';
+    	var a=document.getElementById("iname");
+		a.setAttribute('readonly','readonly');
+
+    	var b=document.getElementById("old");
+		b.setAttribute('hidden','hidden');
 	}
 		
 }
 
-function fill(json)
-{
-	var a=10;
-}
 
 </script>
 
@@ -93,21 +88,36 @@ function fill(json)
 ?>
 
 <form method=post action=/controllers/purchase.php>
+	Invoice no.<input style=left:200px;position:absolute;  type=text name=no ><br><br>
 	Item Code
 	<input style=left:200px;position:absolute; type=text id=code name=code onchange=request("/controllers/billComplete.php?code=",this.value,1)><br><br>
 
-	Item Name<input style=left:200px;position:absolute;background:yellow; tabindex=-1 type=text id=iname readonly><br><br>
-
+	Item Name<input style=left:200px;position:absolute; tabindex=-1 type=text id=iname><br><br>
 	Quantity<input style=left:200px;position:absolute; type=text name=qty><br><br>
+	<div id=old>
+	Purchase Price(per unit)<input style=left:200px;position:absolute;  type=text name=qty ><br><br>
+	Profit<input style=left:200px;position:absolute; type=text name=profit >
+	<select name=profitmode style=left:373px;position:absolute >
+			<option value=0>%</option>
+			<option value=1>Rs.</option>
+	</select><br><br>
+	Rate of Tax
+	<?php
+		include("$_SERVER[DOCUMENT_ROOT]/config/config.php");
+		echo "<select name=rot style=left:200px;position:absolute >
+				<option value=0>0%</option>
+				<option value=1>$tax1%</option>
+				<option value=2>$tax2%</option>
+				</select>";
 
+	?><br><br>
+	</div>
+	Purchased from<textarea style=left:200px;position:absolute; name=from></textarea><br><br>
 	Purchase Date<input style=left:200px;position:absolute;background:yellow; tabindex=-1 type=text id=date readonly name=date>
 	<div id="calender" style="margin:10px 0 30px 0;
 			 width:205px; height:200px;">
     </div>
+	<input type=hidden name=write id=write value=1>
 	<input type=submit value='Add'>
 </form>
-
-<div id=codeBrowser style=left=600;top:500;position:absolute;>
-</div>
-	
 </html>

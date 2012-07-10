@@ -91,10 +91,13 @@
 	$reply='';
 	
 	$totalWithoutTax=$SnonTax+$S_t1+$S_t2;
-	$query=sprintf($querySales,$billNo,$SnonTax,$S_t1,$S_t2,
-	$T_t1,$T_t2,$totalWithoutTax,'CA');
-	$con->query($query);
-	$query='';
+	if($totalWithoutTax!=0)
+	{
+		$query=sprintf($querySales,$billNo,$SnonTax,$S_t1,$S_t2,
+		$T_t1,$T_t2,$totalWithoutTax,'CA');
+		$con->query($query);
+		$query='';
+	}
 
 
 	header("location:/views/print.php?billNo=$billNo");

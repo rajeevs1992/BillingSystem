@@ -215,5 +215,5 @@ function redirect()
 	<input type=submit style='top:600px;left:250px;position:absolute;height:40px;width:80px' id=save	onclick='document.value=this.value' value='Save'>
 	</form>
 	</body>";
-	$con->query("DELETE FROM temp WHERE tempBillNo='$_GET[billno]'");
+//	$con->query("DELETE FROM temp WHERE tempBillNo='$_GET[billno]'");
 ?>

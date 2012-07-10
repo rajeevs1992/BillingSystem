@@ -145,30 +145,29 @@ function redirect()
 
 <?php
 	$spaces="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-	echo "<div style=left:350;position:absolute;>
-		KGST No 26120286$spaces\n CST No 25125286$spaces\n TIN 32080668625$spaces\n
-		</div><br><br>";
+	echo "<div style=text-align:center>
+		KGST No 26120286$spaces CST No 25125286$spaces TIN 32080668625
+		</div><br>";
 	$billNo=$page->getBillNo();
 	$readonly="style=background:#f1ec9b";
 	echo "<div style='left:10px;color:red'>";
 	echo "Bill Number:<input type=text value=$billNo readonly $readonly>&nbsp;&nbsp;";
-	echo "Billed By:<input type=text value=$_SESSION[uname] readonly $readonly></div><br>";
+	echo "Billed By:<input type=text value=$_SESSION[uname] readonly $readonly></div>";
 	echo "<div style='left:10px;position:absolute'>No.</div>";
 	echo "<div style='left:55px;position:absolute'>MRP</div>";
-	echo "<div style='left:100px;position:absolute'>Price+Tax</div>";
+	echo "<div style='left:110px;position:absolute'>Price+Tax</div>";
 	echo "<div style='left:250px;position:absolute'>ITEM</div>";
-	echo "<div style='left:390px;position:absolute'>Code</div>";
-	echo "<div style='left:460px;position:absolute'>Qty</div>";
-	echo "<div style='left:512px;position:absolute'>Unit Price</div>";
-	echo "<div style='left:607px;position:absolute'>RoT</div>";
-	echo "<div style='left:660px;position:absolute'>Tax Amt</div>";
-	echo "<div style='left:750px;position:absolute'>Cess</div>";
+	echo "<div style='left:410px;position:absolute'>Code</div>";
+	echo "<div style='left:490px;position:absolute'>Qty</div>";
+	echo "<div style='left:540px;position:absolute'>Unit Price</div>";
+	echo "<div style='left:640px;position:absolute'>RoT</div>";
+	echo "<div style='left:700px;position:absolute'>Tax Amt</div>";
 	echo "<div style='left:850px;position:absolute'>Total</div>";
 
 	echo"
 	<div style='
 	height:200px;overflow:scroll;
-	top:240px;position:absolute;
+	top:225px;position:absolute;
 	border:3px black solid;'>
 	<form method=\"post\" name=\"billForm\" onsubmit=\"return redirect();\">";
 	echo "<input type=hidden value=$billNo name=billNo>";
@@ -198,7 +197,7 @@ function redirect()
 	<input type=submit  style='top:600px;left:150px;position:absolute;height:40px;width:80px' id=print	onclick='document.value=this.value' value='Print' name='Print'>
 	<input type=submit style='top:600px;left:250px;position:absolute;height:40px;width:80px' id=save	onclick='document.value=this.value' value='Save' name='Save'>
 	</form>
-	<div style='right:5px;top:240px;position:absolute;border:3px black solid;height:200px;width:300px;overflow:scroll;'>
+	<div style='right:5px;top:225px;position:absolute;border:3px black solid;height:200px;width:300px;overflow:scroll;'>
 	<h4 style=display:inline>Search code:</h4><br>
 	<div style=color:green;font-size:12>
 	Fig. in bracket:Stock<br>
