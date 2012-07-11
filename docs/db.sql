@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 10, 2012 at 08:45 PM
+-- Generation Time: Jul 11, 2012 at 10:35 PM
 -- Server version: 5.1.54
 -- PHP Version: 5.3.5-1ubuntu7.7
 
@@ -55,7 +55,17 @@ INSERT INTO `invoices` (`slNo`, `mrp`, `PplusT`, `name`, `code`, `qty`, `unitPri
 (1, 10, 12.12, 'Pen', 'abc', 1, 12, 5, 0.12, NULL, 12.12, '4', 'rajeev'),
 (2, 0, 9.706, 'Book-Theodolite field book', 'b008', 1, 9.61, 5, 0.096, NULL, 9.706, '4', 'rajeev'),
 (1, 0, 121.11, 'Box Sigma Instrument', 'b010', 12, 115.34, 5, 69.2, NULL, 1453.32, '5', 'rajeev'),
-(2, 0, 5.04, 'Arrows', 'a003', 1, 4.44, 13.5, 0.6, NULL, 5.04, '5', 'rajeev');
+(2, 0, 5.04, 'Arrows', 'a003', 1, 4.44, 13.5, 0.6, NULL, 5.04, '5', 'rajeev'),
+(1, 0, 10.09, 'Book-Theodolite field book', 'b008', 1, 9.61, 5, 0.48, NULL, 10.09, '6', 'rajeev'),
+(2, 0, 5.04, 'Arrows', 'a003', 5, 4.44, 13.5, 3, NULL, 25.2, '6', 'rajeev'),
+(1, 150, 148, 'BSD', 'absd', 1, 148, 0, 0, NULL, 148, '7', 'rajeev'),
+(2, 0, 121.11, 'Box Sigma Instrument', 'b010', 1, 115.34, 5, 5.77, NULL, 121.11, '7', 'rajeev'),
+(3, 0, 5.04, 'Arrows', 'a003', 4, 4.44, 13.5, 0, NULL, 0, '7', 'rajeev'),
+(1, 150, 148, 'BSD', 'absd', 1, 148, 0, 0, NULL, 148, '8', 'rajeev'),
+(2, 0, 5.04, 'Arrows', 'a003', 5, 4.44, 13.5, 3, NULL, 25.2, '8', 'rajeev'),
+(3, 0, 121.11, 'Box Sigma Instrument', 'b010', 12, 115.34, 5, 69.2, NULL, 1453.32, '8', 'rajeev'),
+(1, 10, 9.7061, 'Pen1', 'b0081', 1, 9.61, 5, 0.0961, NULL, 9.7061, '9', 'rajeev'),
+(1, 0, 5.04, 'Arrows', 'a003', 4, 4.44, 13.5, 2.4, NULL, 20.16, '10', 'rajeev');
 
 -- --------------------------------------------------------
 
@@ -82,11 +92,11 @@ CREATE TABLE IF NOT EXISTS `item` (
 --
 
 INSERT INTO `item` (`code`, `name`, `mrp`, `unitPrice`, `rateOfTax`, `sellingPrice`, `purchasingPrice`, `profitPerUnit`, `totalStock`, `openingStock`) VALUES
-('b008', 'Book-Theodolite field book', NULL, 9.61, 1, 10, 8, 10, 1, 287),
-('a003', 'Arrows', NULL, 4.44, 2, 5, NULL, 5, 9, 15),
-('b010', 'Box Sigma Instrument', NULL, 115.34, 1, 120, NULL, 120, 81, 149),
-('b0081', 'Pen1', 10, 9.61, 1, 9.994, 12, -2.006, 14, 0),
-('absd', 'BSD', 150, 148, 0, 148, 145, 3, 4, 0),
+('b008', 'Book-Theodolite field book', NULL, 9.61, 1, 10, 8, 10, 0, 287),
+('a003', 'Arrows', NULL, 4.44, 2, 5, NULL, 5, 6, 15),
+('b010', 'Box Sigma Instrument', NULL, 115.34, 1, 120, NULL, 120, 68, 149),
+('b0081', 'Pen1', 10, 9.61, 1, 9.994, 12, -2.006, 13, 0),
+('absd', 'BSD', 150, 148, 0, 148, 145, 3, 2, 0),
 ('abc', 'Pen', 10, 12, 1, 12.48, 12, 0.48, 0, 0);
 
 -- --------------------------------------------------------
@@ -105,6 +115,8 @@ CREATE TABLE IF NOT EXISTS `purchase` (
 -- Dumping data for table `purchase`
 --
 
+INSERT INTO `purchase` (`code`, `qty`, `date`) VALUES
+('a003', 15, '2012-07-10');
 
 -- --------------------------------------------------------
 
@@ -134,7 +146,12 @@ INSERT INTO `sales` (`billNo`, `date`, `salesNonTax`, `tax1sales`, `tax2sales`, 
 ('2', '2012-06-09', 1184, 0, 0, 0, 0, 1184, 'C'),
 ('3', '2012-06-09', 1184, 129.948, 0, 4.998, 0, 1313.95, 'C'),
 ('4', '2012-06-09', 0, 21.826, 0, 0.216, 0, 21.826, 'C'),
-('5', '2012-06-09', 0, 1453.32, 5.04, 69.2, 0.6, 1458.36, 'C');
+('5', '2012-06-09', 0, 1453.32, 5.04, 69.2, 0.6, 1458.36, 'C'),
+('6', '2012-07-10', 0, 10.09, 25.2, 0.48, 3, 35.29, 'CA'),
+('7', '2012-07-10', 148, 121.11, 0, 5.77, 0, 269.11, 'CA'),
+('8', '2012-07-10', 148, 1453.32, 25.2, 69.2, 3, 1626.52, 'CA'),
+('9', '2012-07-10', 0, 9.7061, 0, 0.0961, 0, 9.7061, 'CA'),
+('10', '2012-07-11', 0, 0, 20.16, 0, 2.4, 20.16, 'CA');
 
 -- --------------------------------------------------------
 

@@ -62,14 +62,14 @@ function notify(json)
     	document.getElementById("write").value='0';
     	var a=document.getElementById("iname");
 		a.setAttribute('readonly','readonly');
-
+		a.setAttribute('tabindex','-1');
+		document.getElementById("qty").focus();
     	var b=document.getElementById("old");
 		b.setAttribute('hidden','hidden');
 	}
 		
+		
 }
-
-
 </script>
 
 
@@ -92,8 +92,8 @@ function notify(json)
 	Item Code
 	<input style=left:200px;position:absolute; type=text id=code name=code onchange=request("/controllers/billComplete.php?code=",this.value,1)><br><br>
 
-	Item Name<input style=left:200px;position:absolute; tabindex=-1 type=text id=iname><br><br>
-	Quantity<input style=left:200px;position:absolute; type=text name=qty><br><br>
+	Item Name<input style=left:200px;position:absolute; type=text id=iname><br><br>
+	Quantity<input style=left:200px;position:absolute; type=text name=qty id=qty><br><br>
 	<div id=old>
 	Purchase Price(per unit)<input style=left:200px;position:absolute;  type=text name=qty ><br><br>
 	Profit<input style=left:200px;position:absolute; type=text name=profit >
