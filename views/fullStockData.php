@@ -41,7 +41,6 @@
 					<td>item</td>\
 					<td>rot</td>\
 					<td>up</td>\
-					<td>sp</td>\
 					<td>pp</td>\
 					<td>profit</td>\
 					<td>stock</td>\
@@ -55,7 +54,6 @@
 			<th>Item</th>\
 			<th>RoT</th>\
 			<th>Unit Price</th>\
-			<th>SP</th>\
 			<th>Purchasing Price</th>\
 			<th>Profit/Unit</th>\
 			<th>Total Stock</th>\
@@ -72,9 +70,8 @@
 			temp=temp.replace('item',reply[i].name);
 			temp=temp.replace('rot',reply[i].rateOfTax);
 			temp=temp.replace('up',reply[i].unitPrice);
-			temp=temp.replace('sp',reply[i].sellingPrice);
 			temp=temp.replace('pp',reply[i].purchasingPrice);
-			temp=temp.replace('profit',reply[i].profitPerUnit);
+			temp=temp.replace('profit',reply[i].profit);
 			temp=temp.replace('stock',reply[i].totalStock);
 			temp=temp.replace('os',reply[i].openingStock);
 			data=data+temp;
@@ -97,8 +94,8 @@
 		<th>Sales</th>
 	</tr>
 	<tr style=color:green>
-		<td>$valueOS</td>
 		<td>$valueCS</td>
+		<td>$valueOS</td>
 		<td>$sales</td>
 	<tr>
 	</table>
@@ -117,7 +114,6 @@
 			<th>Item</th>
 			<th>RoT</th>
 			<th>Unit Price</th>
-			<th>SP</th>
 			<th>Purchasing Price</th>
 			<th>Profit/Unit</th>
 			<th>Total Stock</th>
@@ -130,6 +126,8 @@
 				$row['rateOfTax']=$tax1;
 			else if($row['rateOfTax']==2)
 				$row['rateOfTax']=$tax2;
+			if($row['profitMode']==0)
+				$row['profit']=$row['profit']*.01*$row['purchasingPrice'];
 		echo "
 		<tr>
 			<td>$row[code]</td>
@@ -137,9 +135,8 @@
 			<td>$row[name]</td>
 			<td>$row[rateOfTax]</td>
 			<td>$row[unitPrice]</td>
-			<td>$row[sellingPrice]</td>
 			<td>$row[purchasingPrice]</td>
-			<td>$row[profitPerUnit]</td>
+			<td>$row[profit]</td>
 			<td>$row[totalStock]</td>
 			<td>$row[openingStock]</td>
 		</tr>

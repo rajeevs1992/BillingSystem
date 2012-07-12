@@ -1,4 +1,10 @@
 <?php
+	function d()
+	{
 			$date=date('d-m-y');
-			echo $date;
+			return $date;
+	}
+
+
+	echo d();
 ?>

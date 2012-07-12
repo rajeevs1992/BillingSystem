@@ -6,9 +6,7 @@
 	$val=$_GET['val'];
 	$reply='';
 	if($mode=='1')
-	{
 		$reply=$con->query("SELECT * FROM item WHERE name LIKE '%$val%' OR code LIKE '%$val%'");
-	}
 	else
 	{
 		if($val!='')
@@ -24,12 +22,20 @@
 	if($reply!=0)
 	{
 		$i=0;
+		$row=array();
 		while($row=mysql_fetch_assoc($reply))
 		{
-			if($row['rateOfTax']==1)
-				$row['rateOfTax']=$tax1;
-			else if($row['rateOfTax']==2)
-				$row['rateOfTax']=$tax2;
+			if($mode == 1)
+			{
+				if($row['rateOfTax']==1)
+					$row['rateOfTax']=$tax1;
+				else if($row['rateOfTax']==2)
+					$row['rateOfTax']=$tax2;
+				if($row['profitMode']=='1')
+					$row['profit']=round(($row['purchasingPrice']+$row['profit']),2);
+				else
+					$row['profit']=round(($row['purchasingPrice']+($row['purchasingPrice']*$row['profit']/100)),2);
+			}
 			$a[$i++]=$row;
 		}
 	}

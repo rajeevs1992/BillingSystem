@@ -88,15 +88,16 @@ function notify(json)
 ?>
 
 <form method=post action=/controllers/purchase.php>
-	Invoice no.<input style=left:200px;position:absolute;  type=text name=no ><br><br>
-	Item Code
+	Invoice no.*<input style=left:200px;position:absolute;  type=text name=no ><br><br>
+	Item Code*
 	<input style=left:200px;position:absolute; type=text id=code name=code onchange=request("/controllers/billComplete.php?code=",this.value,1)><br><br>
 
-	Item Name<input style=left:200px;position:absolute; type=text id=iname><br><br>
-	Quantity<input style=left:200px;position:absolute; type=text name=qty id=qty><br><br>
+	Item Name*<input style=left:200px;position:absolute; type=text name=iname id=iname><br><br>
+	Quantity*<input style=left:200px;position:absolute; type=text name=qty id=qty><br><br>
 	<div id=old>
-	Purchase Price(per unit)<input style=left:200px;position:absolute;  type=text name=qty ><br><br>
-	Profit<input style=left:200px;position:absolute; type=text name=profit >
+	MRP<input style=left:200px;position:absolute;  type=text name=mrp><br><br>
+	Purchase Price(per unit)*<input style=left:200px;position:absolute;  type=text name=pp ><br><br>
+	Profit*<input style=left:200px;position:absolute; type=text name=profit >
 	<select name=profitmode style=left:373px;position:absolute >
 			<option value=0>%</option>
 			<option value=1>Rs.</option>
@@ -112,7 +113,7 @@ function notify(json)
 
 	?><br><br>
 	</div>
-	Purchased from<textarea style=left:200px;position:absolute; name=from></textarea><br><br>
+	Purchased from*<textarea style=left:200px;position:absolute; name=from></textarea><br><br>
 	Purchase Date<input style=left:200px;position:absolute;background:yellow; tabindex=-1 type=text id=date readonly name=date>
 	<div id="calender" style="margin:10px 0 30px 0;
 			 width:205px; height:200px;">
