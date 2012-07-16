@@ -70,22 +70,22 @@
 	$query='';
 	$reply='';
 
-	$query="SELECT SUM(total) AS total,SUM(taxAmt) AS tax FROM invoices 
+	$query="SELECT SUM(total) AS total,SUM(taxAmt) AS tax, SUM(qty*unitPrice) AS st1 FROM invoices 
 	WHERE billNo='$billNo' AND rateOfTax='$tax1'";
 	$reply=$con->query($query);
 	if($reply!=0)
 		$reply=mysql_fetch_assoc($reply);
-	$S_t1=$reply['total'];
+	$S_t1=$reply['st1'];
 	$T_t1=$reply['tax'];
 	$query='';
 	$reply='';
 
-	$query="SELECT SUM(total) AS total,SUM(taxAmt) AS tax FROM invoices 
+	$query="SELECT SUM(total) AS total,SUM(taxAmt) AS tax ,SUM(qty*unitPrice) AS st2 FROM invoices 
 	WHERE billNo='$billNo' AND rateOfTax='$tax2'";
 	$reply=$con->query($query);	
 	if($reply!=0)
 		$reply=mysql_fetch_assoc($reply);
-	$S_t2=$reply['total'];
+	$S_t2=$reply['st2'];
 	$T_t2=$reply['tax'];
 	$query='';
 	$reply='';

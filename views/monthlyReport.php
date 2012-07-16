@@ -5,6 +5,12 @@
 	$page=new page("Current Month Reports",3);
 	$con=new database;
 	$m=date('m');
+	echo "<style type=text/css>
+				td
+				{
+					text-align:center;
+				}
+			</style>";
 	$reply=$con->query("SELECT * FROM sales WHERE MONTH(date)='$m'");
 	if($reply!=0)
 	{
@@ -25,10 +31,35 @@
 			echo "<tr>";
 			foreach($row as &$tmp)
 			{
+				
 				echo "<td>$tmp</td>";
 			}
 			echo "</tr>";
 		}
+	$reply=$con->query("SELECT SUM(salesNonTax) AS s0 ,
+	SUM(tax1sales) AS s1 ,
+	SUM(tax2sales) AS s2 ,
+	SUM(tax1) AS t1 ,
+	SUM(tax2) AS t2 ,
+	SUM(totalWithoutTax) as total 
+	FROM sales WHERE MONTH(date)='$m'");
+	$reply=mysql_fetch_assoc($reply);
+	$reply['s0']=round($reply['s0'],2);
+	$reply['s1']=round($reply['s1'],2);
+	$reply['s2']=round($reply['s2'],2);
+	$reply['t1']=round($reply['t1'],2);
+	$reply['t2']=round($reply['t2'],2);
+	$reply['total']=round($reply['total'],2);
+	echo "<tr>
+	<th></th>
+	<th>TOTAL</th>
+	<th>$reply[s0]</th>
+	<th>$reply[s1]</th>
+	<th>$reply[s2]</th>
+	<th>$reply[t1]</th>
+	<th>$reply[t2]</th>
+	<th>$reply[total]</th>
+	<th></th>";
 	echo "</table>";
 	}
 ?>

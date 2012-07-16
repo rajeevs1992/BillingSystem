@@ -65,7 +65,7 @@ function populate(json,count)
 		return;
 	}
 	document.getElementById("mrp"+count).value=json.mrp;
-    document.getElementById("PplusT"+count).value=roundNumber((parseFloat(json.unitPrice)+(json.unitPrice*json.rateOfTax/100)),2);
+    document.getElementById("PplusT"+count).value=roundNumber((parseFloat(json.unitPrice)+(json.unitPrice*json.rateOfTax/100)),3);
     document.getElementById("name"+count).value=json.name;
     document.getElementById("unitPrice"+count).value=roundNumber(parseFloat(json.unitPrice),2);
     document.getElementById("rateOfTax"+count).value=json.rateOfTax;
@@ -109,7 +109,7 @@ function sum()
 		temp=parseFloat(document.getElementById("total"+i).value);
 		sum=sum+temp;
 	}
-	document.getElementById("total").value=roundNumber(sum,2);
+	document.getElementById("total").value=roundNumber(sum,0);
 }
 
 function verifyStock(count,qty)

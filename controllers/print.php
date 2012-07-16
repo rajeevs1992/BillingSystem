@@ -3,7 +3,7 @@
 ?>
 <html>
 <body style='font-size:10px'>
-	<div style='width:450px;border:3px black solid;'>
+	<div style='border:3px black solid;'>
 		<div style='font-size:12px;text-align:center'>ENGINEERING COLLEGE COOPERATIVE STORE,R-51</div>
 		<div style='font-size:10px;text-align:center'>GOVT. ENGINEERING COLLEGE,THRISSUR-9,
 		Ph:0487-2334637,Email:gect_society@yahoo.com</div><br>
@@ -12,7 +12,7 @@
 			echo "Invoice Number:$_GET[billNo]<br>Date:$date<br>"
 		?>
 
-		<table style='font-size:9px' border=1 cellpadding=5px>
+		<table style='font-size:9px' cellpadding=5px>
 		<tr>
 			<th>Sl no</th>
 			<th>Code</th>

@@ -1,10 +1,5 @@
 <?php
-	function d()
-	{
-			$date=date('d-m-y');
-			return $date;
-	}
-
-
-	echo d();
+	$a='';
+	if(strlen($a))
+		echo "hello";
 ?>

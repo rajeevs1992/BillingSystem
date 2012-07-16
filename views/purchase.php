@@ -67,6 +67,8 @@ function notify(json)
     	var b=document.getElementById("old");
 		b.setAttribute('hidden','hidden');
 	}
+	else
+    	document.getElementById("write").value='1';
 		
 		
 }
@@ -118,7 +120,7 @@ function notify(json)
 	<div id="calender" style="margin:10px 0 30px 0;
 			 width:205px; height:200px;">
     </div>
-	<input type=hidden name=write id=write value=1>
+	<input type=hidden name=write id=write value='1'>
 	<input type=submit value='Add'>
 </form>
 </html>
