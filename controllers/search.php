@@ -7,6 +7,8 @@
 	$reply='';
 	if($mode=='1')
 		$reply=$con->query("SELECT * FROM item WHERE name LIKE '%$val%' OR code LIKE '%$val%'");
+	else if($mode=='5')
+		$reply=$con->query("SELECT name FROM item WHERE code='$val'");
 	else
 	{
 		if($val!='')

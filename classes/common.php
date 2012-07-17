@@ -61,7 +61,7 @@
 				<table border=1 cellpadding=5px align=center>";
 			echo sprintf($buttonLink,"/views/bill.php","<<Back");
 			echo sprintf($buttonLink,"/views/editItem.php","Edit Item");
-			echo sprintf($buttonLink,"/","Delete item");
+			echo sprintf($buttonLink,"/views/delete.php","Delete item");
 			echo sprintf($buttonLink,"/views/monthlyReport.php","Monthly Statement");
 			echo sprintf($buttonLink,"/views/fullStockData.php","Full Stock");
 			echo sprintf($buttonLink,"/views/purchase.php","Purchase");
