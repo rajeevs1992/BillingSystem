@@ -112,10 +112,10 @@
 			<th>Code</th>
 			<th>MRP</th>
 			<th>Item</th>
-			<th>RoT</th>
+			<th>Rate <br>Of Tax</th>
 			<th>Unit Price</th>
-			<th>Purchasing Price</th>
-			<th>Profit/Unit</th>
+			<th>Purchasing<br>Price</th>
+			<th>Profit<br>per Unit</th>
 			<th>Total Stock</th>
 			<th>Opening Stock</th>
 		</tr>
@@ -133,7 +133,7 @@
 			<td>$row[code]</td>
 			<td>$row[mrp]</td>
 			<td>$row[name]</td>
-			<td>$row[rateOfTax]</td>
+			<td>$row[rateOfTax]%</td>
 			<td>$row[unitPrice]</td>
 			<td>$row[purchasingPrice]</td>
 			<td>$row[profit]</td>

@@ -3,6 +3,14 @@
 ?>
 <html>
 <body style='font-size:10px'>
+<style type=text/css>
+	td
+	{
+		width:50px;
+		height:1px;
+		text-align:center;
+	}
+</style>
 	<div style='border:3px black solid;'>
 		<div style='font-size:12px;text-align:center'>ENGINEERING COLLEGE COOPERATIVE STORE,R-51</div>
 		<div style='font-size:10px;text-align:center'>GOVT. ENGINEERING COLLEGE,THRISSUR-9,
@@ -12,7 +20,7 @@
 			echo "Invoice Number:$_GET[billNo]<br>Date:$date<br>"
 		?>
 
-		<table style='font-size:9px' cellpadding=5px>
+		<table style='font-size:9px' cellpadding=0px>
 		<tr>
 			<th>Sl no</th>
 			<th>Code</th>
@@ -65,7 +73,7 @@
 			$totalMrp+=$row['mrp']*$row['qty'];
 			$user=$row['user'];
 		}
-		$total=$totalGross+$totalTax;
+		$total=round($totalGross+$totalTax,0);
 		echo "
 		<tr>
 			<th></th>
@@ -88,11 +96,6 @@
 	}
 
 ?>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
 	</div>
 	<script language=javascript>
 		window.print();

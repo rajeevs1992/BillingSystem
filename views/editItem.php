@@ -58,6 +58,13 @@ function notify(json)
     	document.getElementById("pp").value=json.purchasingPrice;
     	document.getElementById("profit").value=json.profit;
 	}
+	else
+	{
+		alert("Invalid code!!!");
+    	document.getElementById("code").value='';
+    	document.getElementById("code").focus();
+	}
+
 }
 </script>
 

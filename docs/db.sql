@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 16, 2012 at 10:53 PM
+-- Generation Time: Jul 18, 2012 at 11:02 AM
 -- Server version: 5.1.54
 -- PHP Version: 5.3.5-1ubuntu7.4
 
@@ -83,38 +83,9 @@ CREATE TABLE IF NOT EXISTS `item` (
 --
 
 INSERT INTO `item` (`code`, `name`, `mrp`, `unitPrice`, `rateOfTax`, `purchasingPrice`, `profit`, `profitMode`, `totalStock`, `openingStock`) VALUES
-('abc', 'Pen', 10, 9, 2, 8, 1, 1, 154, 150),
+('abc', 'Pen', 10, 7.07, 1, 7, 1, 0, 154, 150),
 ('vin', 'Lavender', 60, 50.5, 2, 50, 1, 0, 9, 17),
-('b008', 'Arrows', 50, 40.4, 1, 40, 1, 0, 46, 50),
-('pen', 'Pen', 30, 29, 0, 25, 4, 1, 59, 60);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `purchase`
---
-
-CREATE TABLE IF NOT EXISTS `purchase` (
-  `inv_no` varchar(15) NOT NULL,
-  `code` varchar(10) DEFAULT NULL,
-  `name` varchar(50) DEFAULT NULL,
-  `qty` int(11) DEFAULT NULL,
-  `rot` int(11) NOT NULL,
-  `pp` float NOT NULL,
-  `taxAmt` float NOT NULL,
-  `from` varchar(100) NOT NULL,
-  `date` date DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `purchase`
---
-
-INSERT INTO `purchase` (`inv_no`, `code`, `name`, `qty`, `rot`, `pp`, `taxAmt`, `from`, `date`) VALUES
-('15624', 'b008', 'Arrows', 50, 1, 40, 95.24, 'Binani', '2012-06-16'),
-('1324', 'abc', 'Pen', 14, 2, 8, 13.32, 'Lexi', '2012-06-16'),
-('845', 'pen', 'Pen', 60, 0, 25, 0, 'Hero', '2012-06-16'),
-('1992', 'vin', 'Lavender', 17, 2, 50, 101.1, 'RJV', '2012-06-16');
+('b008', 'Arrows', 50, 40.4, 1, 40, 1, 0, 46, 50);
 
 -- --------------------------------------------------------
 
