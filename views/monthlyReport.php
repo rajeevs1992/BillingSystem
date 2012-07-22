@@ -63,4 +63,5 @@
 	echo "</table>";
 	}
 ?>
-
+<a href=/controllers/reportGen.php?mode=t><input type=submit value='Generate Report'></a>
+</html>
