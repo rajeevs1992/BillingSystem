@@ -9,7 +9,6 @@
 <title>Login</title>
 <h1>The Govt Engineering College,Thrissur</h1>
 <h2>The Engineering College Co-Operative Store Ltd</h2>
-<a href=/test/test.php >Test</a>
 <div style='right:90px;top:150px;border:3px black solid;position:absolute'>
 <br>
 <h3>&nbsp;Sign In</h3>

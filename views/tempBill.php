@@ -57,7 +57,6 @@ function calculate(count,qty)
    	var unit=document.getElementById("unitPrice"+count).value;
 	var rot=document.getElementById("rateOfTax"+count).value;
    	document.getElementById("taxAmt"+count).value=roundNumber(qty*unit*rot/100,3);
-   	document.getElementById("cess"+count).value=roundNumber(unit*rot*.01/100,3);
 	sum();
 }
 function roundNumber(rnum, rlength) 
@@ -125,6 +124,7 @@ function redirect()
 <?php
 	require_once("$_SERVER[DOCUMENT_ROOT]/classes/common.php");
 	require_once("$_SERVER[DOCUMENT_ROOT]/classes/database.php");
+	include("$_SERVER[DOCUMENT_ROOT]/config/config.php");
 	$query="SELECT * FROM temp WHERE tempBillNo='$_GET[billno]'";
 	$con=new database();
 	$reply=$con->query($query);
@@ -136,14 +136,13 @@ function redirect()
 	echo "Billed By:<input type=text value=$_SESSION[uname] readonly $readonly></div><br><br><br>";
 	echo "<div style='left:10px;position:absolute'>No.</div>";
 	echo "<div style='left:55px;position:absolute'>MRP</div>";
-	echo "<div style='left:100px;position:absolute'>Price+Tax</div>";
+	echo "<div style='left:110px;position:absolute'>Price+Tax</div>";
 	echo "<div style='left:250px;position:absolute'>ITEM</div>";
-	echo "<div style='left:390px;position:absolute'>Code</div>";
-	echo "<div style='left:460px;position:absolute'>Qty</div>";
-	echo "<div style='left:512px;position:absolute'>Unit Price</div>";
-	echo "<div style='left:607px;position:absolute'>RoT</div>";
-	echo "<div style='left:660px;position:absolute'>Tax Amt</div>";
-	echo "<div style='left:750px;position:absolute'>Cess</div>";
+	echo "<div style='left:410px;position:absolute'>Code</div>";
+	echo "<div style='left:490px;position:absolute'>Qty</div>";
+	echo "<div style='left:540px;position:absolute'>Unit Price</div>";
+	echo "<div style='left:640px;position:absolute'>RoT</div>";
+	echo "<div style='left:700px;position:absolute'>Tax Amt</div>";
 	echo "<div style='left:850px;position:absolute'>Total</div>";
 
 	echo"
@@ -167,9 +166,13 @@ function redirect()
 		$attr=mysql_fetch_assoc($itemReply);
 		echo "<input type=text tabindex=-1 id=n$i value=$i readonly $readonly size=2>\n";
 		echo "<input type=text tabindex=-1 id='mrp$i' readonly $readonly size=4 value=".$attr['mrp']."\n>";
+		if($attr['rateOfTax']==1)
+			$attr['rateOfTax']=$tax1;
+		else if($attr['rateOfTax']==2)
+			$attr['rateOfTax']=$tax2;
 		$tax=($attr['rateOfTax']/100)*$attr['unitPrice'];
-		$taxAmt=$tax*$row['qty'];
-		$PplusT=$tax+$attr['unitPrice'];
+		$taxAmt=round($tax*$row['qty'],2);
+		$PplusT=round($tax+$attr['unitPrice'],3);
 		echo "<input type=text tabindex=-1 id='PplusT$i' name=PplusT$i readonly $readonly size=7 value=".$PplusT.">\n";
 		echo "<input type=text tabindex=-1 id=name$i readonly $readonly size=25 value=".$attr['name'].">\n";
 		echo "<input type=text name=code$i id=code$i size=6 value='".$row['code']."' onchange=request('/controllers/billComplete.php?code=',this.value,$i,1)>\n";
@@ -177,9 +180,7 @@ function redirect()
 		echo "<input type=text tabindex=-1 id=unitPrice$i name=unitPrice$i size=7 $readonly readonly value=".$attr['unitPrice'].">\n";
 		echo "<input type=text tabindex=-1 id=rateOfTax$i size=7 readonly $readonly value=".$attr['rateOfTax'].">\n";
 		echo "<input type=text tabindex=-1 id=taxAmt$i name=taxAmt$i size=7 readonly $readonly value=".$taxAmt.">\n";
-		$cess=0;
-		echo "<input type=text tabindex=-1 id=cess$i name=cess$i size=7 readonly $readonly value=".$cess.">\n";
-		$total=$row['qty']*($PplusT+$cess);
+		$total=round($row['qty']*($PplusT),2);
 		$billTotal+=$total;
 		echo "<input type=text tabindex=-1 id=total$i name=total$i  readonly $readonly value=".$total."><br>\n";
 	$i++;
@@ -198,14 +199,13 @@ function redirect()
 		echo "<input type=text tabindex=-1 id=unitPrice$i name=unitPrice$i size=7 $readonly readonly>\n";
 		echo "<input type=text tabindex=-1 id=rateOfTax$i size=7 readonly $readonly>\n";
 		echo "<input type=text tabindex=-1 id=taxAmt$i name=taxAmt$i size=7 readonly $readonly>\n";
-		echo "<input type=text tabindex=-1 id=cess$i name=cess$i size=7 readonly $readonly>\n";
 		echo "<input type=text tabindex=-1 id=total$i name=total$i value=0 readonly $readonly><br>\n";
 
 	}
 	echo "
 	</div>
 	<div style='top:450;left:600;position:absolute;'>
-	BILL AMOUNT :<input type=text id=total name=total readonly $readonly value=".$billTotal.">
+	BILL AMOUNT :<input type=text id=total name=total readonly $readonly value=".round($billTotal,0).">
 	</div>
 	<div style='top:500;left:50;position:absolute;'>
 	TOTAL CASH :<input type=text id=cash onchange=getBal(this.value)>

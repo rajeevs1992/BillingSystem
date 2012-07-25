@@ -64,6 +64,7 @@
 			echo sprintf($buttonLink,"/views/delete.php","Delete item");
 			echo sprintf($buttonLink,"/views/monthlyReport.php","Monthly Statement");
 			echo sprintf($buttonLink,"/views/fullStockData.php","Full Stock");
+			echo sprintf($buttonLink,"/views/oldbill.php","Print old Bills");
 			echo sprintf($buttonLink,"/views/purchase.php","Purchase");
 			echo "</table>";	
 		}

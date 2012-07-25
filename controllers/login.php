@@ -10,13 +10,15 @@
 		$reply=mysql_fetch_assoc($reply);
 		$_SESSION['uname']=$reply['uname'];
 		$_SESSION['acessLevel']=$reply['acessLevel'];
-		$var=date("FY", mktime(0, 0, 0, (date('m')-1))); 
-		if(file_exists($_SERVER['DOCUMENT_ROOT']."/reports/$var.csv"))
+		$var=date("FY",mktime(0, 0, 0, (date('m')-1))); 
+		if(file_exists("$_SERVER[DOCUMENT_ROOT]/reports/sales/$var.csv"))
 		{
+			echo "$_SERVER[DOCUMENT_ROOT]/reports/sales/$var.csv exists";
 			header("location:/views/bill.php");
 		}
 		else
 		{
+			echo "$_SERVER[DOCUMENT_ROOT]/reports/sales/$var.csv";
 			header("location:/controllers/reportGen.php");
 		}
 	}

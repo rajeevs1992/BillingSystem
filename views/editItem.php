@@ -71,7 +71,7 @@ function notify(json)
 
 <?php
 	require_once("$_SERVER[DOCUMENT_ROOT]/classes/common.php");
-	$page=new page("Purchase",1);
+	$page=new page("Edit Item",1);
 	if(isset($_SESSION['message']))
 	{
 	echo "

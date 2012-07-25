@@ -1,5 +1,7 @@
 <?php
 	session_start();
+	if(!isset($_SESSION['uname']))
+		header("location:/views/login.php");
 ?>
 <html>
 <body style='font-size:10px'>
@@ -93,6 +95,7 @@
 		$totalMrp=$totalMrp-$total;
 	echo "<hr><h5 align=right >BILL AMOUNT:$total</h5><hr>";
 	echo "You saved Rs.$totalMrp!!<br>Billed by $user<br><hr>";
+	echo "<div style=font-size:8>DEVELOPED BY CSE 2010-14 GEC Thrissur</div>";
 	}
 
 ?>

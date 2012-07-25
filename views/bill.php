@@ -50,7 +50,7 @@ function search(reply)
 		var data='';
 		for(i=0;i<reply.length;i++)
 		{
-			data=data+reply[i].code+'---'+reply[i].name+'('+reply[i].totalStock+')<br>';
+			data=data+reply[i].code+'---'+reply[i].name+'<div style=color:blue;display:inline>('+reply[i].totalStock+')</div><br>';
 		}
 		document.getElementById('search').innerHTML=data;
 	}
@@ -195,7 +195,7 @@ function redirect()
 	Balance    :<input type=text id=bal readonly $readonly tabindex=-1>
 	</div>
 	<input type=submit  style='top:600px;left:150px;position:absolute;height:40px;width:80px' id=print	onclick='document.value=this.value' value='Print' name='Print'>
-	<input type=submit style='top:600px;left:250px;position:absolute;height:40px;width:80px' id=save	onclick='document.value=this.value' value='Save' name='Save'>
+	<input type=submit  style='top:600px;left:250px;position:absolute;height:40px;width:80px' id=save	onclick='document.value=this.value' value='Save' name='save'>
 	</form>
 	<div style='right:5px;top:225px;position:absolute;border:3px black solid;height:200px;width:300px;overflow:scroll;'>
 	<h4 style=display:inline>Search code:</h4><br>
@@ -203,7 +203,7 @@ function redirect()
 	Fig. in bracket:Stock<br>
 	</div>
 	Item name/Code:<input type=text onkeyup=request('/controllers/search.php?mode=3&val=',this.value,'a',3)>
-	<div id=search style=color:red;>
+	<div id=search style=color:red;font-size:12px>
 	</div>
 	</div>
 	</body>";
