@@ -150,9 +150,11 @@ function redirect()
 		</div><br>";
 	$billNo=$page->getBillNo();
 	$readonly="style=background:#f1ec9b";
-	echo "<div style='left:10px;color:red'>";
+	echo "<div style='left:10px;color:red;display:inline'>";
 	echo "Bill Number:<input type=text value=$billNo readonly $readonly>&nbsp;&nbsp;";
 	echo "Billed By:<input type=text value=$_SESSION[uname] readonly $readonly></div>";
+	echo "<form method=\"post\" name=\"billForm\" style=display:inline onsubmit=\"return redirect();\">";
+	echo "Name:<input type=text tabindex=-1 name=billto style=display:inline>";
 	echo "<div style='left:10px;position:absolute'>No.</div>";
 	echo "<div style='left:55px;position:absolute'>MRP</div>";
 	echo "<div style='left:110px;position:absolute'>Price+Tax</div>";
@@ -163,13 +165,11 @@ function redirect()
 	echo "<div style='left:640px;position:absolute'>RoT</div>";
 	echo "<div style='left:700px;position:absolute'>Tax Amt</div>";
 	echo "<div style='left:850px;position:absolute'>Total</div>";
-
 	echo"
 	<div style='
 	height:200px;overflow:scroll;
 	top:225px;position:absolute;
-	border:3px black solid;'>
-	<form method=\"post\" name=\"billForm\" onsubmit=\"return redirect();\">";
+	border:3px black solid;'>";
 	echo "<input type=hidden value=$billNo name=billNo>";
 	for($i=1;$i<51;$i++)
 	{

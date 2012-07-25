@@ -28,7 +28,8 @@
 	taxAmt='%s',
 	total='%s',
 	billNo='%s',
-	user='%s'";
+	user='%s',
+	billto='%s'";
 
 	$reply=$con->query("SELECT MAX(billNo) AS billNo FROM invoices");
 	if($reply!=0)
@@ -53,7 +54,7 @@
 			$reply['name'],$reply['code'],$qty,
 			$reply['unitPrice'],$reply['rateOfTax'],
 			$_POST["taxAmt$i"],
-			$_POST["total$i"],$billNo,$_SESSION['uname']);
+			$_POST["total$i"],$billNo,$_SESSION['uname'],$_POST['billto']);
 			$con->query($query);
 			$query='';
 			

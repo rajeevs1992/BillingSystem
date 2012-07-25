@@ -39,6 +39,12 @@
 <?php
 	require_once("$_SERVER[DOCUMENT_ROOT]/classes/database.php");
 	$con=new database;
+	$reply=$con->query("SELECT DISTINCT billto FROM invoices WHERE billNo='$_GET[billNo]'");
+	$row=mysql_fetch_assoc($reply);
+	if($row!=0)
+	{
+		echo "Name:$row[billto]<br>";
+	}
 	$reply=$con->query("SELECT * FROM invoices WHERE billNo='$_GET[billNo]'");
 	$totalUP=0;
 	$totalQty=0;
@@ -74,6 +80,7 @@
 			$totalTax+=$row['taxAmt'];
 			$totalMrp+=$row['mrp']*$row['qty'];
 			$user=$row['user'];
+			$billto=$row['billto'];
 		}
 		$total=round($totalGross+$totalTax,0);
 		echo "
